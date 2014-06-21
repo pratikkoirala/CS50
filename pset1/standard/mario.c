@@ -1,35 +1,45 @@
+// include standard library
 #include <stdio.h>
+// include cs50 library
+#include <cs50.h>
 
-void printPyramid(int x); // prototype
+// prototype
+void printPyramid(int x);
 
+// main function
 int main(int argc, char* argv[])
 {
-	printf("So, like hi! How big do you want your 'mid? Somewhere between 0 and 23 please! ");
+    // initialize size to zero
+    int size = 0;
 
-	int size;
-
+    // a do-while loop, 'cause why not!?
 	do{
-		scanf("%d", &size); // have the int point to (hold the memory address) for whatever was inputted
-	} while(size <= 0 || size > 23);
+        // prompt user
+        printf("Height: ");
+        // get size of pyramid
+        size = GetInt();
+	} while(size < 0 || size > 23); // if size is negative or greater than 23, try again
 
-	printf("Height: %.2i\n", size);
+	// print pyramid
 	printPyramid(size);
 }
 
-
+// function to print our pyramid
 void printPyramid(int x)
 {
 	if(x == 0)
 		return;
 	else
 	{
-		// this is the loop for the height of the pyramid
 		for(int i = 0; i < x; i++)
 		{
-			for(int h = 0; h < (x - i); h++)
+		    // print out spaces
+			for(int h = 1; h < (x - i); h++)
 				printf(" ");
+			// print out hashes
 			for(int k = 0; k <= i+1; k++)
 				printf("#");
+			// print out newline
 			printf("\n");
 		}
 	}
