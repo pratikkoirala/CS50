@@ -1,4 +1,4 @@
 CS50
 ====
 
-CS50 Psets
+A collection of all CS50 regular and hacker psets with comments!
