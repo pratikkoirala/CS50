@@ -69,6 +69,8 @@ int main(int argc, char* argv[])
 	else
 			printf("INVALID\n");
 
+    free(newCardptr->indexNumber);
+    
 	return 0;
 }
 
@@ -96,6 +98,7 @@ void separate(long long x, array* number)
 	number->position = position;
 	// structs's indexNumber is the CC's # in an index'able array
 	number->indexNumber = array;
+
 	return;
 }
 
