@@ -15,7 +15,7 @@ Strategy: Take a number, break it up into parts to be indexed as an array. Then,
 as necessary.
 */
 
-// hold the broken up word inside a struct with its size
+// hold the broken up card inside a struct with its size
 typedef struct array{
 
 	int position;
@@ -40,7 +40,8 @@ int main(int argc, char* argv[])
 	// put number into index'able array
 	separate(card, newCardptr);
 	// test Cards
-	if((newCardptr->position == 13 || newCardptr->position == 16) && newCardptr->indexNumber[newCardptr->position-1] == 4)
+	if((newCardptr->position == 13 || newCardptr->position == 16) && 
+	    newCardptr->indexNumber[newCardptr->position-1] == 4)
 	{
 		if(testCard(newCardptr))
 			printf("VISA\n");
@@ -71,6 +72,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+// turn int into index'able array
 void separate(long long x, array* number)
 {
 	// initialize a pointer to memory
@@ -90,7 +92,9 @@ void separate(long long x, array* number)
 		array = realloc(array, (position + 1) * sizeof(int));
 	} while (x > 0);
 
+    // points to the end of the array
 	number->position = position;
+	// structs's indexNumber is the CC's # in an index'able array
 	number->indexNumber = array;
 	return;
 }
@@ -104,18 +108,21 @@ bool testCard(array* x)
 	// American Express
 	// counter holds summation of digits that were multiplied by two
 	int counter = 0;
+
+	// multiply every other digit by 2, then sum their DIGITS
 	for(int h = 1; h < position; h=h+2)
 	{
 		int sum = array[h] * 2;
 		if(sum > 9)
 		{
 			counter = counter + sum % 10;
-			counter = counter + sum /10;
+			counter = counter + sum / 10;
 		}
 		else
 			counter = sum + counter;
 	}
 
+    // add to previous sum the sum of remaining digits
 	int secondCounter = 0;
 	for(int h = 0; h < position; h=h+2)
 	{
@@ -123,6 +130,7 @@ bool testCard(array* x)
 		secondCounter = secondCounter + sum;
 	}
 
+    // if mod 10 = 0, then true
 	if((secondCounter + counter)%10 == 0)
 		return TRUE;
 	else
