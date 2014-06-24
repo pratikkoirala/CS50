@@ -18,7 +18,7 @@
  * and if it is found returns. With the salt, I don't think it is possible to have one-to-one
  * lookup.
  *
- * A const char*, you can't change the character to which the pointer points to,however, you
+ * A const char*, you can't change the character to which the pointer points to, however, you
  * can change the direction of the pointer.
  *
  * Char representations of integers are different than a string representation of that integer.
