@@ -12,29 +12,28 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+    // convert second argument into integer
 	int mask = atoi(argv[1]);
 
 	// store string to convert into an array of chars
-	// printf("What string would you like to test?\n");
 	char* input= GetString(); 
 
 	for(int i = 0; i < strlen(input); i++)
 	{
-		if((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z'))
+    	if(input[i] >= 'A' && input[i] <= 'Z')
 		{
-			if(input[i] >= 'A' && input[i] <= 'Z')
-			{
-				input[i] = input[i] - 'A';
-				input[i] = (input[i] + mask) % 26;
-				input[i] = input[i] + 'A';
-			}
-			else
-			{
-				input[i] = input[i] - 'a';
-				input[i] = (input[i] + mask) % 26;
-				input[i] = input[i] + 'a';
-			}
+			input[i] = input[i] - 'A';
+			input[i] = (input[i] + mask) % 26;
+			input[i] = input[i] + 'A';
 		}
+		else if(input[i] >= 'a' && input[i] <= 'z')
+		{
+			input[i] = input[i] - 'a';
+			input[i] = (input[i] + mask) % 26;
+			input[i] = input[i] + 'a';
+		}
+		else
+		    continue;
 	}
 
 	printf("%s\n", input);
