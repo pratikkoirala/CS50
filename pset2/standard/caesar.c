@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 
 	for(int i = 0; i < strlen(input); i++)
 	{
-    	if(input[i] >= 'A' && input[i] <= 'Z')
+        if(input[i] >= 'A' && input[i] <= 'Z')
 		{
 			input[i] = input[i] - 'A';
 			input[i] = (input[i] + mask) % 26;

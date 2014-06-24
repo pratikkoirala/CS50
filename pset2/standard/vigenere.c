@@ -13,14 +13,21 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+    // char*, same as "string"
 	char* mask = (argv[1]);
 
+    // length of mask
 	int masklength = strlen(mask);
 
 	for(int i = 0; i < masklength; i++)
 	{
+	    // if mask isn't alpha, exit
 		if(!isalpha(mask[i]))
-			return 1;
+        {
+            printf("Only letters!\n");
+            return 1;
+        }
+		// if it is, convert to number between 0 & 26
 		else
 		{
 			if(mask[i] >= 'A' && mask[i] <= 'Z')
@@ -35,25 +42,21 @@ int main(int argc, char* argv[])
 
 	for(int i = 0, k = 0; i < strlen(input); i++, k++)
 	{
-		if((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z'))
+		if(input[i] >= 'A' && input[i] <= 'Z')
 		{
-			if(input[i] >= 'A' && input[i] <= 'Z')
-			{
-				input[i] = input[i] - 'A';
-				input[i] = (input[i] + mask[k%masklength]) % 26;
-				input[i] = input[i] + 'A';
-			}
-			else
-			{
-				input[i] = input[i] - 'a';
-				input[i] = (input[i] + mask[k%masklength]) % 26;
-				input[i] = input[i] + 'a';
-			}
+			input[i] = input[i] - 'A';
+			input[i] = (input[i] + mask[k%masklength]) % 26;
+			input[i] = input[i] + 'A';
+		}
+		else if(input[i] >= 'a' && input[i] <= 'z')
+		{
+			input[i] = input[i] - 'a';
+			input[i] = (input[i] + mask[k%masklength]) % 26;
+			input[i] = input[i] + 'a';
 		}
 		else
 			k--;
 	}
 
 	printf("%s\n", input);
-
 }
