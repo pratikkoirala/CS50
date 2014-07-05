@@ -7,13 +7,15 @@
 #define FALSE 0
 
 /*
-Notes: you can't determine the size of a dynamically allocated piece of memory with sizeof()
-Notes: do structs not get passed by reference? No, create a struct in main(), then a pointer
-to that struct.
+ * Notes: you can't determine the size of a dynamically allocated piece of memory with sizeof()
+ *
+ * Notes: do structs not get passed by reference? No, create a struct in main(), then a pointer
+ * to that struct.
+ */
 
-Strategy: Take a number, break it up into parts to be indexed as an array. Then, add digits
-as necessary.
-*/
+/* Strategy: Take a number, break it up into parts to be indexed as an array. Then, add digits
+ * as necessary.
+ */
 
 // hold the broken up card inside a struct with its size
 typedef struct array{

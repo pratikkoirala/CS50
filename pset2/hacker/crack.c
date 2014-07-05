@@ -1,63 +1,72 @@
+#define _XOPEN_SOURCE
+
 #include <stdio.h>
 #include <cs50.h>
 #include <string.h>
 #include <unistd.h>
-#include <crypt.h>
 
-#define _XOPEN_SOURCE
-#define LETTERS 26
-#define NUMBERS 10
+int search(char* d, char* h);
 
 /*
- * Crypt takes two arguments, both of const char*. The first is the key that you want
- * to encrypt. The second is salt, which is going to be used to "perturb" the algorithm
- * in 1 of 4096 different ways.  So, basically, the algorithm is going to hash a key, and
- * the salt is going to add an additional layer of encryption because the hash algorithm
- * has 4096 different possibilies depending on the salt. I think when looking up passwords,
- * programs usually take a plaintext word, try out all of 4096 different possible hashes,
- * and if it is found returns. With the salt, I don't think it is possible to have one-to-one
- * lookup.
+ *  This is only a partial solution, as trying to brute force your way though so many passwords takes
+ *  a long time.
  *
- * A const char*, you can't change the character to which the pointer points to, however, you
- * can change the direction of the pointer.
- *
- * Char representations of integers are different than a string representation of that integer.
- * For example, char '1' in string form is "\001", and not just "1"
-*/
+ *  HASH: 50zPJ1UFIYY0o     PASSWORD: 
+ *  HASH: 50q.zrL5e0Sak     PASSWORD: password
+ *  HASH: 50yoN9fp966dU     PASSWORD: crimson
+ *  HASH: HA6101/.LeOak     PASSWORD: 
+ */
 
+// make sure to link in -lcrypt when compiling!
 int main(int argc, char* argv[])
 {
 	char* hash = NULL;
 
+    // check that user provides an encrypted password
 	if(argc != 2)
 		return 1;
 	else
 		hash = argv[1];
 
-	char* salt = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"};
+    // search two dictionaries
+    if(!search("/usr/share/dict/words", hash))
+        return 0;
+    else
+        search("/home/cs50/pset6/dictionaries/large", hash);
 
-	FILE* fp = fopen("/usr/share/dict/words", "r");
+	return 0;
+}
 
+int search(char* dictionary, char* hash)
+{
+	FILE* fp = fopen(dictionary, "r");
+
+    // check if dictionary could be opened
 	if(fp == NULL)
 		return 1;
 	else
 	{
-		// bad
+	    // choose something big enough not to segfault
 		char dictionary_word[120];
 
+        // iterate through dictionary
 		while(fscanf(fp, "%s", dictionary_word) != EOF)
 		{
-			char x[2];
-			x[0] = hash[0];
-			x[1] = hash[1];
-			string result = crypt((const char*) dictionary_word, (const char* ) x);
-			if(!strcmp(result, hash))
-			{
-				printf("%s\n", dictionary_word);
-				break;
-			}
-		}
-	}
-	return 0;
-}
+	        char x[2];
 
+	        // you can do this, and don't need to iterate through all combinations of
+	        // the salt, because the first two characters in the hash ARE the salt
+            x[0] = hash[0];
+            x[1] = hash[1];
+  			string result = crypt((const char*) dictionary_word, (const char* ) x);
+        	if(!strcmp(result, hash))
+            {
+	            printf("%s\n", dictionary_word);
+	            return 0;
+            }
+		}
+
+        // return 1 if password was not found
+	    return 1;
+	}
+}
