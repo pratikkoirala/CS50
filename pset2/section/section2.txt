@@ -1,5 +1,12 @@
 Things students should feel comfortable with before attempting pset2:
 
+    -   First thing students will see is a change in their main(void) function
+        - in place of (void), there will be (int argc, char* argv[]). argc is how many
+          arguments are passed to the program, while argv[] is an array containing the strings 
+          passed in as arguments. 
+              If I run "./caesar 2", then argc = 2, and argv will be an array containing
+              2 strings, "./caesar" and "2".
+          
     -   Students should understand what modulo (%) does and why it's important
         - n%d returns the remainder of n/d where n and d are both integers. 
         - modulo is important because it restricts the max number attainable,
