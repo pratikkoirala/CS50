@@ -93,9 +93,45 @@ Division of Floats
     -   cast ints to floats 
         - 1/10 = 0 because of integer division, whereas (float) 1 / (float) 10 
           will give you .1.
+        - think of it like this, let's say I want to represent 1/3 as a decimal.
+          Well, that's really .3333 repeating; how can I represent this with
+          a finite number of bits? I can't, so there is has to be some imprecision.
+          
 
 Operator Precedence
 
     -   just like in math, PEMDAS
 
 
+Logical AND and Logical OR
+
+    -   && / ||
+
+Switch Statement (only works with integers)
+    - when compiled, this will run much faster than an if-else statement
+
+    - an example
+        
+        printf("Hi!, give me a natural number less than 2 please!\n");
+        int n = GetInt();
+        
+        switch (n)
+        {
+            case 0:
+                printf("Uhh, is this a natural number of not?"\n);
+                break;
+            case 1:
+                printf("Thanks for the 1\n");
+                break;
+            case 2:
+                printf("Thanks for the 2\n");
+                break;
+            default:
+                printf("Thanks for nothing!\n");
+       }
+
+Ternary Operator
+
+    - condition ? (if true) : (else if false);
+
+To be continued ...

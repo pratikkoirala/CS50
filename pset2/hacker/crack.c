@@ -1,23 +1,19 @@
 #define _XOPEN_SOURCE
 
 #include <stdio.h>
-#include <cs50.h>
 #include <string.h>
+#include <stdlib.h>
+#include <cs50.h>
 #include <unistd.h>
 
-int search(char* d, char* h);
+#define MAX 8
 
 /*
- *  This is only a partial solution, as trying to brute force your way though so many passwords takes
- *  a long time.
- *
- *  HASH: 50zPJ1UFIYY0o     PASSWORD: 
- *  HASH: 50q.zrL5e0Sak     PASSWORD: password
- *  HASH: 50yoN9fp966dU     PASSWORD: crimson
- *  HASH: HA6101/.LeOak     PASSWORD: 
- */
+ *  crack.c First search through /usr/share/dict/words, hopefully finding a match. If no match is
+ *  found, create all possible permutations of characters <= MAX characters long. You only need to check
+ *  first 8 characters because that is all crypt() uses when creating a hash code for a user's password.   
+*/
 
-// make sure to link in -lcrypt when compiling!
 int main(int argc, char* argv[])
 {
 	char* hash = NULL;
@@ -28,18 +24,8 @@ int main(int argc, char* argv[])
 	else
 		hash = argv[1];
 
-    // search two dictionaries
-    if(!search("/usr/share/dict/words", hash))
-        return 0;
-    else
-        search("/home/cs50/pset6/dictionaries/large", hash);
-
-	return 0;
-}
-
-int search(char* dictionary, char* hash)
-{
-	FILE* fp = fopen(dictionary, "r");
+    // open dictionary
+    FILE* fp = fopen("/usr/share/dict/words", "r");
 
     // check if dictionary could be opened
 	if(fp == NULL)
@@ -58,6 +44,7 @@ int search(char* dictionary, char* hash)
 	        // the salt, because the first two characters in the hash ARE the salt
             x[0] = hash[0];
             x[1] = hash[1];
+
   			string result = crypt((const char*) dictionary_word, (const char* ) x);
         	if(!strcmp(result, hash))
             {
@@ -65,8 +52,71 @@ int search(char* dictionary, char* hash)
 	            return 0;
             }
 		}
+    }
 
-        // return 1 if password was not found
-	    return 1;
-	}
+    // possible chars of password
+    char* input = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./";
+
+    // length of input
+    int pos = strlen(input);
+
+    // allocate memory for each attempt to create a word
+    char attack[MAX] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+
+    // if searching dictionary fails, create all word combinations
+    for(int a = 0; a < pos; a++)
+    {
+        attack[0] = input[a];
+
+        for(int b = 0; b < pos; b++)
+        {
+            attack[1] = input[b];
+
+            for(int c = 0; c < pos; c++)
+            {
+                attack[2] = input[c];
+
+                for(int d = 0; d < pos; d++)
+                {
+                    attack[3] = input[d];
+
+                    for(int e = 0; e < pos; e++)
+                    {
+                        attack[4] = input[e];
+
+                        for(int f = 0; f < pos; f++)
+                        {
+                            attack[5] = input[f];
+
+                            for(int g = 0; g < pos; g++)
+                            {
+                                attack[6] = input[g];
+
+                                for(int h = 0; h < pos; h++)
+                                {
+                                    attack[7] = input[h];
+
+	                                char x[2];
+
+                                    x[0] = hash[0];
+                                    x[1] = hash[1];
+
+  			                        string result = crypt((const char*) attack, (const char* ) x);
+        	                        if(!strcmp(result, hash))
+                                    {
+                                        // make char[] printable with %s by adding '\0'
+                                        char printable[9];
+	                                    memcpy(printable, attack, 8);
+	                                    printable[8] = '\0';
+	                                    printf("%s\n", printable);
+	                                    return 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
