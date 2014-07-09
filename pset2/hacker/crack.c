@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     }
 
     // possible chars of password
-    char* input = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./";
+    char* input = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./'\"";
 
     // length of input
     int pos = strlen(input);
