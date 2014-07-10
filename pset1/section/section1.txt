@@ -1,1 +1,37 @@
-hello
+Section Schedule
+
+    -   intro, arrays, functions, command-line arguments, pset2
+
+        Introduction
+            -   Be excited!!! This is your first section!
+            
+            -   Introduce yourself, the class, what students can expect from section.
+                -   Although not necessary, alot of TFs give out their phone numbers along with
+                    their email addresses. Just try to be accessible and welcoming, for many this
+                    is their first CS class ever! 
+                    
+            -   Mention some of the resources we have for students ,i.e. Walkthroughs, Shorts, 
+                Study50, etc
+                * Note: Sections are a time to dive in and get some hands on experience with topics
+                        mentioned in class or in study materials, as such, it's expected students
+                        meet us half way! By coming to section having watched the lectures, read
+                        the pset spec, and thought about the problems, students will be able to get
+                        the most our of their time in section.
+            
+            -   Quickly go over grading! Stress that comments are just as important, if not more so,
+                than the actual score! Reading comments is how students will improve.
+                
+            -   Good example, Jason Hirschorn, Section 2 [0:06-9:10]
+
+        Arrays
+            -   How do you make arrays?
+                -   <datatype> <name>[<size>];
+                -   char alpha[26];
+                -   int score[5];   
+
+            -   To initialize an array, simply index into that array starting at 0:
+                -   int score[0] = 0; // zero index all arrays!
+                    int score[1] = 1;
+                    int score[2] = 2;
+                -   int score[] - {1, 2, 3}; /* if you leave out the size of the array here, it will simply
+                                                create an array based on the number of entries. */
