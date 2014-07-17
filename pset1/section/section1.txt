@@ -1,8 +1,7 @@
 Section Schedule
-
     -   intro, arrays, functions, command-line arguments, pset2
 
-        Introduction
+        (1) Introduction
             -   Be excited!!! This is your first section!
             
             -   Introduce yourself, the class, what students can expect from section.
@@ -23,7 +22,7 @@ Section Schedule
                 
             -   Good example, Jason Hirschorn, Section 2 [0:06-9:10]
 
-        Arrays
+        (2) Arrays
             -   How do you make arrays?
                 -   <datatype> <name>[<size>];
                     -   char alpha[26];
@@ -48,9 +47,9 @@ Section Schedule
                                        
             /* POSSIBLE TASK - HAVE EVERYONE CREATE A STRING, THEN PRINT IT OUT, LETTER BY LETTER */
 
-        Functions
+        (3) Functions
             -   Functions (1) take something in [parameters], (2) do something [methods], and
-                finally [3] spit out an answer [return value].         
+                finally (3) spit out an answer [return value].         
                 
             -   Why do we want functions?
                 -   They allow us to minimize the amount of code we need to write. If, say, I wrote a function
@@ -65,5 +64,25 @@ Section Schedule
                 -   void is the parameter, which, in this case, is nothing
                         
             -   Something you have to mention is scope
-                -   If I have a program like scope.c, this will print out 5, because the scope of the 2nd pair 
-                    of inner paratheses refers to the a defined within its bounds.
+                -   If I have a program like scope.c, this will print out 5 and then 0. In the first case, this
+                    is because the scope of the variable is restricted by the curly braces, and in the second case,
+                    because the second variable gets precedence over the first.
+
+            /* POSSIBLE TASK - HAVE EVERYONE CREATE A SEPARATE FUNCTION TO SAY "HELLO" TO THE USER */
+            
+        (4) Command Line Arguments
+            -   One way to pass arguments into a program
+                -   int main(void) becomes int main(int argc, char* argv[])
+                    -   argc is an integer representing the number of arguments passed to the command line
+                    -   argv[] is an array of strings, or char*'s, that were passed into the program
+                -   If, for example, in my terminal window I type in "./mario 8", what will argc and argv be?
+                    -   argc is 2
+                    -   argv is [./mario, 8] // an array of length two
+                    -   you can also treat these arguments as a multi-dimensional array. What is argv[0][2]?
+                        -   'm'
+                        
+            /* POSSIBLE TASK - HAVE EVERYONE TAKE IN A USER'S FULL NAME, VIA THE COMMAND LINE, THEN PRINT OUT
+                               THE FIRST LETTER OF THEIR FIRST NAME */
+
+        (5) Pset Review
+            -   
