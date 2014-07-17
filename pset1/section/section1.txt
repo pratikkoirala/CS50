@@ -26,8 +26,8 @@ Section Schedule
         Arrays
             -   How do you make arrays?
                 -   <datatype> <name>[<size>];
-                -   char alpha[26];
-                -   int score[5];   
+                    -   char alpha[26];
+                    -   int score[5];   
 
             -   To initialize an array, simply index into that array starting at 0:
                 -   int score[0] = 0; // zero index all arrays!
@@ -35,3 +35,35 @@ Section Schedule
                     int score[2] = 2;
                 -   int score[] - {1, 2, 3}; /* if you leave out the size of the array here, it will simply
                                                 create an array based on the number of entries. */
+
+            /* POSSIBLE TASK - HAVE EVERYONE CREATE AN ARRAY, THEN ITERATE OVER ITS MEMBERS */
+
+            -   Although we can use the "string" declaration to declare strings, "strings" are really
+                just arrays of characters.
+                -   So, if I declare some string s = "bowden fever"; then I can index into this like any
+                    other array.
+                    -   s[0] = 'b';
+                    -   s[1] = 'o'; /* if I were to do something like s[12], which is one past strlen(s), I 
+                                       would get the terminating character '\0'. */
+                                       
+            /* POSSIBLE TASK - HAVE EVERYONE CREATE A STRING, THEN PRINT IT OUT, LETTER BY LETTER */
+
+        Functions
+            -   Functions (1) take something in [parameters], (2) do something [methods], and
+                finally [3] spit out an answer [return value].         
+                
+            -   Why do we want functions?
+                -   They allow us to minimize the amount of code we need to write. If, say, I wrote a function
+                    bool isRob(string s) to tell me, true/false, whether a string is equivalent to "Rob", I
+                    only need to write that function once - in the future I can just refer to this function 
+                    to test strings without having to repeatedly code the same thing.
+                        
+            -   One function everyone has seen already is int main(void)
+                -   int is the return type
+                -   main is the name of the function (every program needs a main() function - it signifies to
+                    the computer where to start running your code)
+                -   void is the parameter, which, in this case, is nothing
+                        
+            -   Something you have to mention is scope
+                -   If I have a program like scope.c, this will print out 5, because the scope of the 2nd pair 
+                    of inner paratheses refers to the a defined within its bounds.
