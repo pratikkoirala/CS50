@@ -1,4 +1,4 @@
-Things students should feel comfortable with before attempting pset1:
+Concepts students should feel comfortable with before attempting pset1:
 
     -   The concept of conditions (if, else)
         - format: if(condition is true)
@@ -40,3 +40,9 @@ Things students should feel comfortable with before attempting pset1:
                 do{
                     "do something at least one time, regardless of condition"
                   } while (condition); 
+
+        - How to use command line arguments
+            - int argc 
+                - the number of arguments entered
+            - string argv[] 
+                - an array of those arguments

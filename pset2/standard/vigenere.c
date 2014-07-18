@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 	// check that there are two command line arguments
 	if(argc != 2)
 	{
-		printf("Input: caesar #\n");
+		printf("Input: cipher\n");
 		return 1;
 	}
 
