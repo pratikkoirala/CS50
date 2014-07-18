@@ -86,9 +86,9 @@ Section Schedule
 
         (5) Pset Review
             -   This week, students will be attempting Crypto
-                -   Caesar cipher is fairly straightforward; at the command line the user inputs a word and then 
-                    a cipher signifying how many positions to rotate the characters in the target word. So, for 
-                    example, if I entered the word "Daven" followed by "1", it would output "Ebwfo".
+                -   Caesar cipher is fairly straightforward; at the command line the user inputs an integer signifying 
+                    how many positions to rotate the characters in the target word. So, for example, if I entered the 
+                    word "Daven" followed by "1", it would output "Ebwfo".
                     -   Students should be careful: all command line arguments are strings. How might they convert
                         "1" in the above example to an int?
                             -   atoi()
