@@ -9,7 +9,7 @@ Section Schedule
                     their email addresses. Just try to be accessible and welcoming, for many this
                     is their first CS class ever! 
                     
-            -   Mention some of the resources we have for students ,i.e. Walkthroughs, Shorts, 
+            -   Mention some of the resources we have for students, i.e. Walkthroughs, Shorts, 
                 Study50, etc
                 * Note: Sections are a time to dive in and get some hands on experience with topics
                         mentioned in class or in study materials, as such, it's expected students

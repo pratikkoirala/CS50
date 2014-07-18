@@ -40,9 +40,3 @@ Concepts students should feel comfortable with before attempting pset1:
                 do{
                     "do something at least one time, regardless of condition"
                   } while (condition); 
-
-        - How to use command line arguments
-            - int argc 
-                - the number of arguments entered
-            - string argv[] 
-                - an array of those arguments
