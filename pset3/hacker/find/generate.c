@@ -21,17 +21,17 @@
 
 int main(int argc, string argv[])
 {
-    // make sure you have either 2 or 3 arguments
+    // TODO: comment me
     if (argc != 2 && argc != 3)
     {
         printf("Usage: ./generate n [s]\n");
         return 1;
     }
 
-    // convert string to integer
+    // TODO: comment me
     int n = atoi(argv[1]);
 
-    // if you got 3 inputs, seed rand with the 3rd input, else seed it with time(NULL)
+    // TODO: comment me
     if (argc == 3)
     {
         srand((unsigned int) atoi(argv[2]));
@@ -41,7 +41,7 @@ int main(int argc, string argv[])
         srand((unsigned int) time(NULL));
     }
 
-    // print out the "random" numbers
+    // TODO: comment me
     for (int i = 0; i < n; i++)
     {
         printf("%i\n", rand() % LIMIT);

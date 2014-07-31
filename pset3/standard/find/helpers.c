@@ -23,7 +23,7 @@ bool search(int value, int values[], int n)
 	// Binary search
 	while(lower <= upper)
 	{
-		int middle = (upper+lower) /2;
+		int middle = (upper+lower)/2;
 
 		if(values[middle] == value)
 			return true;
