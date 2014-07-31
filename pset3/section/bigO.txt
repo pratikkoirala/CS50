@@ -9,5 +9,6 @@ Big O
             when multipled by a constant factor will ALWAYS be larger than the fuction in question, we can
             say that the function in question runs in O(f(m)) time, since f(m) provides an upper bounds for our
             function.
-            
+            -   Note, for a function like merge sort, although the tightest bound is nlog(n), you can describe the
+                function's asymptotic worst case by ANY function that provides an upper bound, such as O(n^2).
             

@@ -1,7 +1,22 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <cs50.h>
 
-#define SIZE 8
+#define SIZE 10
+
+/******************************************************************************
+ * Insertion sort, in this version, has space complexity O(1) and time        *
+ * complexity of O(n^2) where n is the length of the array. Insertion sort    *
+ * builds the final sorted array one element at a time by removing, one at a  *
+ * time, elements in the unsorted array and placing them in their correct     *
+ * position in the sorted array.                                              *
+ *                                                                            *
+ *  E.G.                                                                      *
+ *      [2, 8, 1, 4, 3]                                                       *
+ *                      ->                                                    *
+ *                          [1, 2, 8, 4, 3]                                   *
+ *                          [1, 2, 4, 8, 3]                                   *
+ *                          [1, 2, 3, 4, 8]                                   *
+******************************************************************************/
 
 // prototypes
 void sort(int array[], int length);
@@ -9,26 +24,34 @@ void print(int array[]);
 
 int main(void)
 {
-    int array[SIZE] = {3, 7, 4, 9, 5, 2, 6, 1};
+    // sample array
+    int array[SIZE] = {3, 7, 4, 9, 5, 2, 6, 1, 50, 0};
 
+    // print initial array
+    printf("Initial: ");
+    print(array);
+
+    // insertion sort
     sort(array, SIZE);
 
+    // print sorted array
+    printf("Sorted: ");
     print(array);
 }
 
-// insertion sort; time complexity O(n^2), space complexity O(1)
+// insertion sort
 void sort(int array[], int length)
 {
-    // go through list
+    // go through unsorted list
     for(int k = 0; k < length - 1; k++)
     {
         // choose element right outside sorted part of list
         int insert = array[k+1];
 
-        // see if insert is smaller than any element in sorted list
+        // see if 'insert' is smaller than any element in sorted list
         for(int i = 0; i < k + 1; i++)
         {
-            // element is smaller than some element in sorted list
+            // if element is smaller than some element in sorted list
             if(insert < array[i])
             {
                 int temp = array[i];
@@ -36,14 +59,16 @@ void sort(int array[], int length)
                 // shift everything down
                 for(int h = i; h <= k; h++)
                 {
+                    // store array[h+1] in temp2
                     int temp2 = array[h+1];
                     // replace array[h+1] with the item before it
                     array[h+1] = temp;
-                    // store in temp the element, array[h+1], that was just replaced
+                    // store in temp the element array[h+1], which was stored
+                    // in temp2; remember array[h+1] was already replaced above
                     temp = temp2;
                 }
 
-                // insert new element at beginning of shifted array
+                // insert new element
                 array[i] = insert;
 
                 // break out of loop

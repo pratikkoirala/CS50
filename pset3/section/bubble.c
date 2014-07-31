@@ -5,7 +5,16 @@
 
 /******************************************************************************
  * Bubble Sort runs in O(1) space complexity and O(n^2) time complexity. It   *
- * works on an array of size n by iterating across the
+ * works on an array of size n by iterating across the unsorted part of the   *
+ * array, switching adjacent items that are out of place. In this way, larger *
+ * elements tend to 'bubble' to the top.                                      *
+ *                                                                            *
+ * E.G.                                                                       *
+ *      [4, 1, 7, 10, 3]                                                      *
+ *                       ->                                                   *
+ *                          [1, 4, 7, 3, 10]                                  *
+ *                          [1, 4, 3, 7, 10]                                  *
+ *                          [1, 3, 4, 7, 10]                                  *
  *****************************************************************************/
 
 // prototype
@@ -17,10 +26,15 @@ int main(void)
     // sample array
     int array[SIZE] = {1, 4, 10, 11, 2, 50, 51, 3, 32, -15};
 
+    // print initial array
+    printf("Initial: ");
+    print(array);
+
     // bubble sort
     sort(array, SIZE);
 
     // print sorted array
+    printf("Sorted: ");
     print(array);
 }
 
@@ -47,7 +61,7 @@ void sort(int array[], int n)
             }
         }
 
-        if(!swaps)
+            if(!swaps)
             break;
     }
 }
