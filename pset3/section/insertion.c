@@ -1,10 +1,9 @@
 #include <stdio.h> 
-#include <cs50.h>
 
 #define SIZE 10
 
 /******************************************************************************
- * Insertion sort, in this version, has space complexity O(1) and time        *
+ * Insertion sort, in this version, has space complexity O(n) and time        *
  * complexity of O(n^2) where n is the length of the array. Insertion sort    *
  * builds the final sorted array one element at a time by removing, one at a  *
  * time, elements in the unsorted array and placing them in their correct     *

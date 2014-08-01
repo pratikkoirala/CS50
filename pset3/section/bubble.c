@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <cs50.h>
 
 #define SIZE 10
 
 /******************************************************************************
- * Bubble Sort runs in O(1) space complexity and O(n^2) time complexity. It   *
+ * Bubble Sort runs in O(n) space complexity and O(n^2) time complexity. It   *
  * works on an array of size n by iterating across the unsorted part of the   *
  * array, switching adjacent items that are out of place. In this way, larger *
  * elements tend to 'bubble' to the top.                                      *
