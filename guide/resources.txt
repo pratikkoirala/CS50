@@ -2,7 +2,7 @@
 
 A short list of some websites you may find useful over the semester!
 
-Mainpage! Come here to download psets, watch lectures and shorts, 
+Mainpage! Come here to download psets, watch lectures and shorts.
     CS50: https://cs50.harvard.edu/
 
 Apps like Discuss, Submit, and the Gradebook.
