@@ -2,6 +2,26 @@
 
 #define SIZE 10
 
+/******************************************************************************
+ * Selection sort, in this version, has space complexity O(n) and time        *
+ * complexity O(n^2) where n is the length of the array. Selection sort       *
+ * builds the final sorted array by removing, one at a time, the smallest     *
+ * element in the unsorted array and placing it at the head of the sorted     *
+ * array.                                                                     *
+ *                                                                            *
+ *  E.G.                                                                      *
+ *      [50, 1, 42, 4, 51]                                                    *
+ *                      ->                                                    *
+ *                          [1, 50, 42, 4, 51]                                *
+ *                          [1, 4, 42, 50, 51]                                *
+ *                          [1, 4, 42, 50, 51]                                *
+ *                          [1, 4, 42, 50, 51]                                *
+ *                                                                            *
+ * Note: the same trick used with bubble sort wouldn't optimize selection     *
+ * sort. An array like [1, 3, 2] would have no swaps the first run through,   *
+ * however, it is obviously not sorted.                                       *
+ ******************************************************************************/
+
 void sort(int array[], int size);
 void print(int array[]);
 
@@ -10,12 +30,15 @@ int main(void)
     // sample array
     int array[SIZE] = {55, 10, 50, 41, 33, 4, 3, 1, 22, 24};
 
+    // print out initial array
+    printf("Initial: ");
     print(array);
 
     // selection sort
     sort(array, SIZE);
 
-    // print out array
+    // print out sorted array
+    printf("Sorted: ");
     print(array);
 }
 
