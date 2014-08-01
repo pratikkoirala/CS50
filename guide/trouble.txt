@@ -1,1 +1,8 @@
-What to do if you run into trouble
+                                       [Bugs]
+
+As always, with this many students and TFs there will undoubtedly be some 
+hiccups. Some of the most frequent problems are:
+
+    -   grading psets on time
+    -   handling student anxiety 
+    -   making it to everything! (sections, meetings, OHs, etc) 
