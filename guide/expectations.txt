@@ -1,1 +1,26 @@
-what we expect from our TFs
+                                       [Expectations]
+                                       
+While teaching CS50 can be fun, there are some standards we expect all our TFs
+to adhere to:
+
+    1. We expect all our TFs to attend their sections, at least one OHs a week,
+       TF training in the Fall, staff meetings, all grading parties, 
+       the Hackathon, and the Fair.
+       
+    2. We expect our TFs to be accessible to their students outside of class.
+       Whether that means responding to emails, calls, or answering questions
+       on Discuss, the help you provide students outside the classroom is just
+       as important as the time you spend with them in section and at OHs.
+       
+    3. We expect you to prepare and be ready to teach your section every week.
+    
+    4. We expect you to return all psets in a timely manner so students can 
+       learn from and improve upon past mistakes. 
+
+    5. If, for any reason, you can't make it to your scheduled OHs, we expect
+       you to find a replacement and let heads know.
+       
+    6. And finally, we want everyone to have a great time; some of the people 
+       you'll meet this semester will become friends of yours for the rest of
+       college. We realize we ask a lot, so if at any time you feel overwhelmed, 
+       let us know so we can help.
