@@ -1,0 +1,18 @@
+                                       [Teaching]
+                                       
+And now the bread and butter of the guide! In the rest of the guide, we'll 
+define what your goals for each section should be, as well as outline short 
+lesson plans to help focus your teaching. 
+
+Although we're giving you a blueprint, it is by no means meant to limit your 
+own teaching style. If you want to focus more on certain topics than others, 
+by all means go ahead! If you want to use your own code examples then do it! If 
+you're a senior TF and feel like what you're doing works then, if it ain't broke 
+don't fix it! The following pages are simply meant to provide clear and concise 
+goals and examples for TFs who might need them.
+
+In general, the first page will outline the goals of the section, which are
+basically what the student should know and be able to do once section is over.
+Next, in a couple of pages we'll give you a lesson plan, full of important 
+topics to cover, code examples, and helpful things to point out to students 
+before they attempt that week's pset.
