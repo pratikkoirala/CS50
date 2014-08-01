@@ -1,6 +1,25 @@
                                        [Resources]
 
-CS50 Manual:
-Reference50:
-Study50:
+Mainpage! Come here to download psets, watch lectures and shorts, 
+    CS50: https://cs50.harvard.edu/
 
+Apps like Discuss, Submit, and the Gradebook.
+    CS50 Apps: http://newapps.cs50.net/cs50/@/portal
+
+Information about APIs, libraries, the appliance, etc.
+    CS50 Manual: https://manual.cs50.net/
+
+An online manual of standard C library functions with less comfortable 
+versions of selected, frequently used functions.
+    Reference50: https://reference.cs50.net/
+
+A collection of questions, slides, and information on all topics you might
+teach during sections. Many TFs find Study50's slides and code examples
+good jumping off points for creating their own material.
+    Study50: https://study.cs50.net/
+    
+An easy to use tool to help students search for courses.
+    CS50 Courses: https://courses.cs50.net/
+    
+Our reddit page!
+    /r/cs50: http://www.reddit.com/r/cs50/
