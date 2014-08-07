@@ -5,4 +5,14 @@ hiccups. Some of the most frequent problems are:
 
     -   grading psets on time
     -   handling student anxiety 
-    -   making it to everything! (sections, meetings, OHs, etc) 
+    -   making it to everything! (sections, staff meetings, OHs, etc) 
+
+In case of trouble, if you're a first year TF the first person you should go to 
+is your Mentor. We've paired everyone up in a Mentor/Mentee relationship; so, 
+if you're new, you'll have someone to show you the ropes! Mentors will help
+give guidance at OHs, provide feedback on sections, and be available should
+any problems arise first year TFs might feel unsure how to handle. 
+
+If anything big comes up, though, like you're unable to finish grading psets 
+or if you have to miss a scheduled meeting, you can always reach heads at
+heads@cs50.harvard.edu!
