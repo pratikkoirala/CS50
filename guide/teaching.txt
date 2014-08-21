@@ -7,8 +7,8 @@ lesson plans to help focus your teaching.
 Although we're giving you a blueprint, it is by no means meant to limit your 
 own teaching style. If you want to focus more on certain topics than others, 
 by all means go ahead! If you want to use your own code examples then do it! If 
-you're a senior TF and feel like what you're doing works then, if it ain't broke 
-don't fix it; the following pages are simply meant to provide clear and concise 
+you're a senior TF and feel like what you're doing works then if it ain't broke 
+don't fix it! The following pages are simply meant to provide clear and concise 
 goals and examples for TFs who might need them.
 
 In general, the first page will outline the goals of the section, which are

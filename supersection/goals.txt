@@ -1,4 +1,13 @@
-Concepts students should feel comfortable with before attempting pset1:
+Concepts students should feel comfortable with before attempting pset1: C
+
+    -   They should feel comfortable working in the appliance and should be
+        able to navigate around by using commands like "ls", "cd", "cp", "rm",
+        etc.
+
+    -   Should understand the different data types and be aware of common 
+        pitfalls:
+            - truncation
+            - floats vs. ints 
 
     -   The concept of conditions (if, else)
         - format: if(condition is true)

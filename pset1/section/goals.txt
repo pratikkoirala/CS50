@@ -35,7 +35,7 @@ Things students should feel comfortable with before attempting pset2:
         - printf(%c%c%c\n", s[0], s[1], s[2]);
               Output: Rob
                 
-/** This part gets into pointers and memory allocation - can be skipped for less comfy sections **/         
+/** This part gets into pointers and memory allocation - can be skipped for less comfy sections **/
 
     -   Well then, what's the difference between char*, string, and char[]?
         - char* and string are exactly the same. Something like char* s = "Hello"
