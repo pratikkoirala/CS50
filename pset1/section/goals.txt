@@ -1,4 +1,4 @@
-Things students should feel comfortable with before attempting pset2:
+Things students should feel comfortable with before attempting pset2: Crypto
 
     -   First thing students will see is a change in their main(void) function
         - in place of (void), there will be (int argc, char* argv[]). argc is how many
