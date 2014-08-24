@@ -44,9 +44,10 @@ void sort(int values[], int n)
 	// Bubble
 	for(int k = 0; k < n-1; k++)
 	{
+	    // optimization
 		int swaps = 0;
 
-		for(int i = 0; i < n-1 ; i++)
+		for(int i = 0; i < n-1; i++)
 		{
 
 			if(values[i] > values[i+1])

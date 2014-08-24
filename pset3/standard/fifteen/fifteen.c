@@ -15,6 +15,13 @@
  * sleep and is simpler to use than nanosleep; `man usleep` for more.
  */
 
+/*
+ * Structs as Parameters:
+ * You can pass structs by both copying (direct passing) and also by reference
+ * with pointers.
+ *
+*/
+
 #define _XOPEN_SOURCE 500
 
 #include <cs50.h>
@@ -34,16 +41,12 @@ int board[MAX][MAX];
 // board's dimension
 int d;
 
-// struct
-typedef	struct open_spaces {
-
-		int left[1][1];
-		int right[1][1];
-		int up[1][1];
-		int down[1][1];
-
-} open_spaces;
-
+// struct to contain the position of a tile. E.G. tile 4 in a starting 3x3
+// matrix will have position row: 1 column: 1
+typedef struct position {
+    int row;
+    int column;
+} position;
 
 // prototypes
 void clear(void);
@@ -53,6 +56,7 @@ void draw(void);
 bool move(int tile);
 bool won(void);
 void save(void);
+bool find(int tile, position* pos);
 
 int main(int argc, string argv[])
 {
@@ -147,12 +151,20 @@ void init(void)
 		for(int column = 0; column < d; column++)
 		{
 			if(start == 0)
-				start = '_';
+				start = '_'; // a char, which can also be interpreted as an int
 
 			board[row][column] = start;
 			start--;
 		}
 	}
+
+    // check whether there are an odd number of tiles (e.g. 4x4 board)
+    if(d%2 == 0)
+    {
+        // switch tiles
+        board[d-1][d-3] = 1;
+        board[d-1][d-2] = 2;
+    }
 }
 
 /**
@@ -160,14 +172,14 @@ void init(void)
  */
 void draw(void)
 {
-	for(int row = 0;  row < d; row++)
+	for(int row = 0; row < d; row++)
 	{
 		for(int column = 0; column < d; column++)
 		{
 			if(board[row][column] == '_')
-				printf("%2c  ", board[row][column]);
+				printf("%2c  ", board[row][column]); // print char
 			else
-				printf("%2i  ", board[row][column]);
+				printf("%2i  ", board[row][column]); // print int
 		}
 
 		printf("\n\n");
@@ -180,20 +192,93 @@ void draw(void)
  */
 bool move(int tile)
 {
-	// 2D array holding the position of the blank space
-	int blank_position[1][2] = {
-									{0, 0}
-							   };
+    /**
+     * There are two ways to do this: either (1) create a global
+     * variable that remembers the blank space, or (2) check around
+     * the tile you want to move to see if the blank space is accessible
+     */
 
-	open_spaces.left =
-	open_spaces.right =
-	open_spaces.up =
-	open_spaces.down =
+/*****************use the find() function and struct position****************
 
-	// if none of the tiles around the blank are the ones you are looking for
-    return false;
+    position pos;
 
-	// else swap blank tile for moved tile
+    if(!find(tile, &pos))
+        return false;
+
+    // find blank & make sure blank space doesn't go out of the matrix 
+    // (sequence in && statment matters)
+    if(pos.row + 1 < d && board[pos.row + 1][pos.column] == '_')
+    {
+        board[pos.row + 1][pos.column] = board[pos.row][pos.column];
+        board[pos.row][pos.column] = '_';
+        return true;
+    }
+    else if(pos.row - 1 >= 0 && board[pos.row - 1][pos.column] == '_')
+    {
+        board[pos.row - 1][pos.column] = board[pos.row][pos.column];
+        board[pos.row][pos.column] = '_';
+        return true;
+    }
+    else if(pos.column + 1 < d && board[pos.row][pos.column + 1] == '_')
+    {
+        board[pos.row][pos.column + 1] = board[pos.row][pos.column];
+        board[pos.row][pos.column] = '_';
+        return true;
+    }
+    else if(pos.column - 1 >= 0 && board[pos.row][pos.column - 1] == '_')
+    {
+        board[pos.row][pos.column - 1] = board[pos.row][pos.column];
+        board[pos.row][pos.column] = '_';
+        return true;
+    }
+    else
+        return false;
+
+******************************************************************************/
+
+    // position of tile
+    int row;
+    int column;
+
+    // find position of tile
+    for(row = 0; row < d; row++)
+    {
+        for(column = 0; column < d; column++)
+        {
+            if(board[row][column] == tile)
+                goto break_nested_loop;
+        }
+    }
+
+    break_nested_loop:
+    // find blank & make sure blank space doesn't go out of the matrix 
+    // (sequence in && statment matters)
+    if(row + 1 < d && board[row + 1][column] == '_')
+    {
+        board[row + 1][column] = board[row][column];
+        board[row][column] = '_';
+        return true;
+    }
+    else if(row - 1 >= 0 && board[row - 1][column] == '_')
+    {
+        board[row - 1][column] = board[row][column];
+        board[row][column] = '_';
+        return true;
+    }
+    else if(column + 1 < d && board[row][column + 1] == '_')
+    {
+        board[row][column + 1] = board[row][column];
+        board[row][column] = '_';
+        return true;
+    }
+    else if(column - 1 >= 0 && board[row][column - 1] == '_')
+    {
+        board[row][column - 1] = board[row][column];
+        board[row][column] = '_';
+        return true;
+    }
+    else
+        return false;
 }
 
 /**
@@ -202,7 +287,48 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
+    int counter = 1;
+
+    for(int row = 0; row < d; row++)
+    {
+        for(int column = 0; column < d; column++)
+        {
+            if(column == d-1 && row == d-1)
+            {
+                if(board[row][column] != '_')
+                    return false;
+            }
+            else if(board[row][column] != counter)
+                return false;
+
+            counter++;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Find the position of the tile and store it in a struct. Return true
+ * if found, false if not.
+ */
+bool find(int tile, position* pos)
+{
+    for(int row = 0; row < d; row++)
+    {
+        for(int column = 0; column < d; column++)
+        {
+            if(tile == board[row][column])
+            {
+                // You have a pointer, which is its own 4 bytes of memory. The
+                // arrow means dereference pointer to struct, then access element.
+                // It is shorthand for (pos*).row
+                (*pos).row = row;
+                pos->column = column;
+                return true;
+            }
+        }
+    }
     return false;
 }
 
