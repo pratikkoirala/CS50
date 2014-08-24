@@ -22,7 +22,7 @@ Supersection Schedule
             -   "pwd" (present working directory)
             
             -   "cd" (change directory)
-                - "cd ." a . signifies the current working directory
+                - "cd ." . signifies the current working directory
                 - "cd .." .. represents the above directory
                 - "cd -" means to cd into the previous directory you were in
   
@@ -56,7 +56,8 @@ Supersection Schedule
                   file called output.txt: ./tmp > output.txt        
 
             -   < (input)
-                - use numbers from file and input them into a GetInt() command:
+                - use numbers from file and input them into something like a 
+                  GetInt() command:
                   ./tmp2 < input.txt
         
             -   | (pipe)
@@ -88,6 +89,8 @@ Supersection Schedule
             -   2 bytes
         -   string (which, in reality, is just a char*)
             -   4 bytes
+        -   pointer
+            -   4 bytes
         -   bool (false = 0; true != 0)
             -   1 byte
 
@@ -98,7 +101,7 @@ Supersection Schedule
             -   mult.
             -   div.
             -   mod. (%)
-            -   no exponentiation (^)
+            -   there is no exponentiation (^ won't work)
 
         -   Division of Floats
             -   cast ints to floats 
@@ -123,24 +126,8 @@ Supersection Schedule
         -   Switch Statement (only works with integers)
             -   when compiled, this will run much faster than an if-else statement,
                 for example:    
-            
-                printf("Hi!, give me a natural number less than 2 please!\n");
-                int n = GetInt();
-            
-                switch (n)
-                {
-                    case 0:
-                        printf("Uhh, is this a natural number of not?"\n);
-                        break;
-                    case 1:
-                        printf("Thanks for the 1\n");
-                        break;
-                    case 2:
-                        printf("Thanks for the 2\n");
-                        break;
-                    default:
-                        printf("Thanks for nothing!\n");
-                }
+
+                see /files/conditional/switch.c
 
         -   Ternary Operator
             -   condition ? (if true do this) : (else if false do this);
@@ -161,7 +148,7 @@ Supersection Schedule
         -   Organization, simplification, abstraction, reusability
         -   the most common function:
             -   int main(void)
-                -   In this example, int is the return value, "main" the name of 
+                -   In this example, "int" is the return value, "main" the name of 
                     the function, and "void" the parameter, which, in this
                     case is nothing
         -   if you write a function below main (which you will) remember to
