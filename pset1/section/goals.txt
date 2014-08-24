@@ -29,7 +29,7 @@ Things students should feel comfortable with before attempting pset2: Crypto
         memory. Let's say I then declare another array, this time an int array[10];
         this will set aside 40 bytes of contiguous memory (each int is 4 bytes).
 
-    -   Students whould realize that strings are really just arrays of characters, so I can index 
+    -   Students should realize that strings are really just arrays of characters, so I can index 
         into a string like I can index into any array.
         - string s = "Rob";
         - printf(%c%c%c\n", s[0], s[1], s[2]);
