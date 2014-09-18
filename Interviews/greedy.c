@@ -40,7 +40,7 @@
     // sum coins and print result
     int coins = quarters + dimes + nickels + pennies;
     printf("%d\n", coins);
-    
+
     return 0; 
  }
 
