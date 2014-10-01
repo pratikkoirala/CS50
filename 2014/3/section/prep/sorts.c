@@ -1,0 +1,116 @@
+#include "helpers.h"
+#include <stdlib.h>
+#include <time.h>
+#include <sys/resource.h>
+#include <sys/time.h>
+#include <ctype.h>
+#include <stdio.h>
+
+#define ALOT 60000
+#define LIMIT 65536
+#define _XOPEN_SOURCE
+
+#undef calculate
+#undef getrusage
+
+// calculate time
+double calculate(const struct rusage* b, const struct rusage* a);
+
+int main(void)
+{
+    // initialize a big array
+    int big_array[ALOT];
+    int big_array2[ALOT];
+    int big_array3[ALOT];
+    int big_array4[ALOT];
+
+    // seed radnom
+    srand((long int) time(NULL));
+
+    // insert random ints into array
+    for(int i = 0; i < ALOT; i++)
+    {
+        big_array[i] = (int) (rand() * LIMIT);
+        big_array2[i] = (int) (rand() * LIMIT);
+        big_array3[i] = (int) (rand() * LIMIT);
+        big_array4[i] = (int) (rand() * LIMIT);
+    }
+
+    // with a size
+    int size = ALOT;
+
+    // struct for time usage
+    struct rusage before, after;
+
+    // get time of bubble sort
+    getrusage(RUSAGE_SELF, &before);
+    int* arr_ptr = bubble_sort(big_array, size);
+    getrusage(RUSAGE_SELF, &after);
+
+    // do nothing with ptr
+    (void) arr_ptr;
+
+    // calculate time
+    double time = calculate(&before, &after);
+
+    // print out time
+    printf("Bubble Sort runs in: %f Seconds\n", time);
+
+    // get time of selection sort
+    getrusage(RUSAGE_SELF, &before);
+    int* arr_ptr2 = selection_sort(big_array2, size);
+    getrusage(RUSAGE_SELF, &after);
+
+    // do nothing with ptr
+    (void) arr_ptr2;
+
+    // calculate time
+    double time2 = calculate(&before, &after);
+
+    // print out time
+    printf("Selection Sort runs in: %f Seconds\n", time2);
+
+    // get time of insertion sort
+    getrusage(RUSAGE_SELF, &before);
+    int* arr_ptr3 = insertion_sort(big_array3, size);
+    getrusage(RUSAGE_SELF, &after);
+
+    // do nothing with ptr
+    (void) arr_ptr3;
+
+    // calculate time
+    double time3 = calculate(&before, &after);
+
+    // print out time
+    printf("Insertion Sort runs in: %f Seconds\n", time3);
+
+    // get time of merge sort
+    getrusage(RUSAGE_SELF, &before);
+    sort(big_array4, 0, size);
+    getrusage(RUSAGE_SELF, &after);
+
+    // calculate time
+    double time4 = calculate(&before, &after);
+
+    // print out time
+    printf("Merge Sort runs in: %f Seconds\n", time4);
+}
+
+/**
+ * Returns number of seconds between b and a.
+ */
+double calculate(const struct rusage* b, const struct rusage* a)
+{
+    if (b == NULL || a == NULL)
+    {
+        return 0.0;
+    }
+    else
+    {
+        return ((((a->ru_utime.tv_sec * 1000000 + a->ru_utime.tv_usec) -
+                 (b->ru_utime.tv_sec * 1000000 + b->ru_utime.tv_usec)) +
+                ((a->ru_stime.tv_sec * 1000000 + a->ru_stime.tv_usec) -
+                 (b->ru_stime.tv_sec * 1000000 + b->ru_stime.tv_usec)))
+                / 1000000.0);
+    }
+}
