@@ -25,16 +25,16 @@ int main(void)
     setColor(circle, "BLACK");
     setFilled(circle, true);
     add(window, circle);
-    
+
     // initial velocity
     double velocity = 2.0;
-    
+
     // bounce forever
     while (true)
     {
         // move circle along x-axis
         move(circle, velocity, 0);
-i'm
+
         // bounce off right edge of window
         if (getX(circle) + getWidth(circle) >= getWidth(window))
         {

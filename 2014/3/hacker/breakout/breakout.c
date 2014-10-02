@@ -52,8 +52,19 @@ GObject detectCollision(GWindow window, GOval ball);
 void centerLabel(GWindow window, GLabel label);
 double randomSpeed(void);
 
-int main(void)
+int main(int argc, char* argv[])
 {
+    bool God = false;
+
+    // check for god mode
+    if(argc == 2)
+    {
+        if(strcmp(argv[1], "GOD") == 0)
+        {
+            God = true;
+        }
+    }
+
     // seed pseudorandom number generator
     srand48(time(NULL));
 
@@ -93,7 +104,7 @@ int main(void)
         GEvent event = getNextEvent(MOUSE_EVENT);
 
         // check for mouse movements
-        if(event != NULL)
+        if(event != NULL && God == false)
         {
             if(getEventType(event) == MOUSE_MOVED)
             {
@@ -101,6 +112,12 @@ int main(void)
                 double y = getY(paddle);
                 setLocation(paddle, x, y);
             }
+        }
+        else if (God == true)
+        {
+            double x = getX(ball);
+            double y = getY(paddle);
+            setLocation(paddle, x, y);
         }
 
         // move the ball
