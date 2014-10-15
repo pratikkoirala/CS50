@@ -5,15 +5,18 @@
 #include "helpers.h"
 #include <stdio.h>
 
-int temp[60000] = {0};
 
 /*
- * Bubble Sort
+ * Bubble Sort - larger values tend to bubble to the top. Here you have the size value
+ * decreasing, which signifies that after each iteration of the loop, the far right side
+ * is sorted. O(n^2) and Omega(n)
  */
 int* bubble_sort(int array[], int size)
 {
     for(int i = 0; i < size; size--)
     {
+        int swaps = 0;
+
         for(int k = i; k < size - 1; k++)
         {
             if(array[k] > array[k + 1])
@@ -22,15 +25,25 @@ int* bubble_sort(int array[], int size)
                 int tmp = array[k];
                 array[k] = array[k + 1];
                 array[k + 1] = tmp;
+                swaps++;
             }
         }
+
+        // if bubble sort iterated through all the elements at least once and didn't find anything
+        // out of place, there are no swaps and everything must be sorted
+        if(swaps == 0)
+            break;
     }
 
     return array;
 }
 
 /*
- * Selection Sort
+ * Selection Sort - kind of like all the sorts, you're going to have a part of the array that is sorted and
+ * another part of the array that is unsorted. What selection sort does is iterates over the unsorted part
+ * of the array looking for the smallest element -> finds it -> then places it at the end of the sorted array
+ * (since each next smallest element is going to be bigger than all elements currently in the sorted array).
+ * O(n^2), Omega(n^2)
  */
 int* selection_sort(int array[], int size)
 {
@@ -55,104 +68,55 @@ int* selection_sort(int array[], int size)
 }
 
 /*
- * Insertion Sort
+ * Insertion Sort - place the next element in the unsorted array into the correct position in the sorted array.
+ * O(n^2) and Omega(n)
  */
 int* insertion_sort(int array[], int size)
 {
-    // sort through array
-    for(int i = 1; i < size; i++)
+    for(int i = 0; i < size - 1; i++)
     {
-        // start of the sorted array
-        int j = i - 1;
+        // next element that isn't sorted
+        int next = array[i + 1];
+        int min = i;
 
-        // if part of unsorted array is smaller than a member in the sorted array
-        if (array[i] < array[j])
+        // find where to place next - if next is never less than array[min]
+        // then the while loop will never evaluate true, so you're just iterating
+        // through the outer for loop (n)
+        while(next < array[min] && min >= 0)
         {
-            int to_sort = array[i];
+            // swap
+            int temp = array[min];
+            array[min] = next;
+            array[min + 1] = temp;
 
-            // shift down
-            while(j >= 0 && to_sort < array[j])
-            {
-                array[j + 1] = array[j];
-                j--;
-            }
-
-            array[j + 1] = to_sort;
+            // decrement counter
+            min--;
         }
+
     }
 
     return array;
 }
 
 /*
- * Merge Sort from Study50
+ * Merge Sort
  */
-void merge (int array[], int start_1, int end_1, int start_2, int end_2)
-{
-    int length = end_2 - start_1 + 1;
-    int index = start_1;
 
-    // While there are elements in both subarrays
-    while (start_1 <= end_1 && start_2 <= end_2)
-    {
-        // Compare numbers at the start of the subarrays
-        if (array[start_1] <= array[start_2])
-        {
-            // Append smaller to merged array
-            temp[index] = array[start_1];
-            index++;
-            start_1++;
-        }
-        else
-        {
-            // Append smaller to merged array
-            temp[index] = array[start_2];
-            index++;
-            start_2++;
-        }
-    }
+/*
+ * Heapsort Sort
+ */
 
-    // While elements remain in subarray 1 (but not subarray 2)
-    while (start_1 <= end_1)
-    {
-        // Append element to merged array
-        temp[index] = array[start_1];
-        start_1++;
-        index++;
-    }
+/*
+ * Quicksort Sort
+ */
 
-    // While elements remain in subarray 2 (but not subarray 1)
-    while (start_2 <= end_2)
-    {
-        // Append element to merged array
-        temp[index] = array[start_2];
-        start_2++;
-        index++;
-    }
+/*
+ * Radix Sort
+ */
 
-    // Copy newly sorted array over to original array
-    for (int i = end_2, j = 0; j <= length; i--, j++)
-    {
-        array[i] = temp[i];
-    }
-}
-
-void sort (int array[], int start, int end)
-{
-    if (end > start)
-    {
-        int middle = (start + end) / 2;
-
-        // sort left half
-        sort(array, start, middle);
-
-        // sort right half
-        sort(array, middle + 1, end);
-
-        // merge the two halves
-        merge(array, start, middle, middle + 1, end);
-    }
-}
+/*
+ * Bucket Sort
+ */
 
 /*
  * Print out an array

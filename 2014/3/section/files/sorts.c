@@ -24,16 +24,18 @@ int main(void)
     int big_array3[ALOT];
     int big_array4[ALOT];
 
-    // seed radnom
+    // seed random
     srand((long int) time(NULL));
 
     // insert random ints into array
     for(int i = 0; i < ALOT; i++)
     {
-        big_array[i] = (int) (rand() * LIMIT);
-        big_array2[i] = (int) (rand() * LIMIT);
-        big_array3[i] = (int) (rand() * LIMIT);
-        big_array4[i] = (int) (rand() * LIMIT);
+        int insert = (int) (rand() * LIMIT);
+
+        big_array[i] = insert;
+        big_array2[i] = insert;
+        big_array3[i] = insert;
+        big_array4[i] = insert;
     }
 
     // with a size
@@ -83,7 +85,7 @@ int main(void)
 
     // print out time
     printf("Insertion Sort runs in: %f Seconds\n", time3);
-
+/*
     // get time of merge sort
     getrusage(RUSAGE_SELF, &before);
     sort(big_array4, 0, size);
@@ -94,6 +96,7 @@ int main(void)
 
     // print out time
     printf("Merge Sort runs in: %f Seconds\n", time4);
+*/
 }
 
 /**
