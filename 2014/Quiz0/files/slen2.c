@@ -1,5 +1,5 @@
 /*
- * Create your own strlen()!
+ * Create your own strlen() in one line!
  */
 
 #include <stdio.h>
@@ -33,11 +33,9 @@ int slen(char* s)
     int counter = 0;
 
     // iterate until we find the end of string character
-    for(int i = 0; s[i] != '\0'; i++)
-    {
-        counter++;
-    }
+    while(s[counter++] != '\0');
 
-    // return length!
-    return counter;
+    // return length - 1, since the above for loop will always increment
+    // counter (even if s[counter] == '\0' since I'm calling counter++, it will still increment!)
+    return counter - 1;
 }
