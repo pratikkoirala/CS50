@@ -85,10 +85,10 @@ int main(void)
 
     // print out time
     printf("Insertion Sort runs in: %f Seconds\n", time3);
-/*
+
     // get time of merge sort
     getrusage(RUSAGE_SELF, &before);
-    sort(big_array4, 0, size);
+    sort(big_array4, size);
     getrusage(RUSAGE_SELF, &after);
 
     // calculate time
@@ -96,7 +96,7 @@ int main(void)
 
     // print out time
     printf("Merge Sort runs in: %f Seconds\n", time4);
-*/
+
 }
 
 /**

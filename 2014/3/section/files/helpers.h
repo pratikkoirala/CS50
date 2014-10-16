@@ -12,10 +12,10 @@ int* selection_sort(int array[], int size);
 int* insertion_sort(int array[], int size);
 
 // sort
-void sort(int array[], int start, int end);
+int* sort(int array[], int size);
 
 // merge
-void merge(int array[], int start_1, int end_1, int start_2, int end_2);
+int* merge(int array1[], int size1, int array2[], int size2);
 
 // print out an array
 void print_array(int array[], int size);

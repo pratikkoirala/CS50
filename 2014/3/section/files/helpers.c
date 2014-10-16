@@ -4,7 +4,8 @@
 
 #include "helpers.h"
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
 
 /*
  * Bubble Sort - larger values tend to bubble to the top. Here you have the size value
@@ -101,7 +102,77 @@ int* insertion_sort(int array[], int size)
 /*
  * Merge Sort
  */
+int* sort(int array[], int size)
+{
+    // if the array is only of size one, then return it since it is sorted
+    if(size == 1)
+        return array;
+    else
+    {
+        int* left_array = malloc(size/2); // malloc memory for left array
+        int* right_array = malloc(size/2);
+        return merge(sort(memcpy(left_array, array, size/2), size/2), size/2, sort(memcpy(right_array, array + size/2, size/2), size/2), size/2);
+    }
+}
 
+int* merge(int array1[], int size1, int array2[], int size2)
+{
+    // malloc enough space for merged array
+    int* merged = malloc((size1 + size2) * sizeof(int));
+
+    // index for merged
+    int k = 0;
+
+    // for loop to add things in to merged
+    for(int i = 0, j = 0; i < size1 && j < size2; )
+    {
+        if(array1[i] < array2[j]) // left array is smaller
+        {
+            *(merged + k) = array1[i];
+            k++;
+            i++;
+        }
+        else if(array1[i] > array2[j]) // right array is smaller
+        {
+            *(merged + k) = array2[j];
+            k++;
+            j++;
+        }
+        else // elements in both array are equal (so omit one)
+        {
+            *(merged + k) = array1[i];
+            k++;
+            i++;
+            j++;
+        }
+
+        // copy one thing if one side is done
+        if(i == size1)
+        {
+            memcpy(merged + k, (array2), sizeof(int) * (size2 - j));
+            j = size2 - 1;
+            k = k + (size2 - 1 - j);
+        }
+
+        if(j == size2)
+        {
+            memcpy(merged + k, (array1), sizeof(int) * (size1 - i));
+            i = size1 - 1;
+            k = k + (size2 - 1 - i);
+        }
+
+    }
+
+    if(k == (size1 + size2))
+        return merged; // no duplicates
+    else
+    {
+            int* resized = malloc(sizeof(int) * k);
+            memcpy(resized, merged, sizeof(int) * k);
+            free(merged);
+            return resized; //duplicates removed
+    }
+}
 /*
  * Heapsort Sort
  */
@@ -131,5 +202,3 @@ void print_array(int array[], int size)
 
     printf("\n");
 }
-
-
