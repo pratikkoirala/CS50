@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*** COMPARATIVE ***/
+
 /*
  * Bubble Sort - larger values tend to bubble to the top. Here you have the size value
  * decreasing, which signifies that after each iteration of the loop, the far right side
@@ -100,7 +102,9 @@ int* insertion_sort(int array[], int size)
 }
 
 /*
- * Merge Sort
+ * Merge Sort [Divide and Conquer] - uses 2 fuctions: the first function breaks down the array into ever smaller chunks until you hit
+ * a size of 1; while the second part compares the chunks and builds an array back up. This comparison algorithm is
+ * about as fast as it gets O & Omega of nlog(n). STILL NEED TO LOOK AT, ERRORS WITH SOME BIG NUMBERS
  */
 int* sort(int array[], int size)
 {
@@ -110,27 +114,29 @@ int* sort(int array[], int size)
     else
     {
         int* left_array = malloc(sizeof(int) * size/2); // malloc memory for left array
-        int* right_array = malloc(sizeof(int) * size/2);
+        int* right_array = malloc(sizeof(int) * size/2); // for right array
 
-        int size1, size2;
+        int size1, size2; // size variables in case size is odd
 
-        if(size % 2 != 0)
+        if(size % 2 != 0) // odd size
         {
             size1 = size/2;
             size2 = size/2 + 1;
         }
-        else
+        else //even
         {
             size1 = size/2;
             size2 = size/2;
         }
 
-        int* sorted1 = sort(memcpy(left_array, array, sizeof(int) * size1), size1);
-        int* sorted2 = sort(memcpy(right_array, array + size1, sizeof(int) * size2), size2);
+        int* sorted1 = sort(memcpy(left_array, array, sizeof(int) * size1), size1); // sort left side
+        int* sorted2 = sort(memcpy(right_array, array + size1, sizeof(int) * size2), size2); // sort right
 
+        // free the memory that was passed to you (assume it was malloc'ed!)
+        free(array);
+
+        // merge the sides
         return merge(sorted1, size1, sorted2, size2);
-
-//        return merge(sort(memcpy(left_array, array, sizeof(int) * size/2), size/2), size/2, sort(memcpy(right_array, array + size/2, sizeof(int) * size/2), size/2), size/2);
     }
 }
 
@@ -142,16 +148,16 @@ int* merge(int array1[], int size1, int array2[], int size2)
     // index for merged
     int k = 0;
 
-    // for loop to add things in to merged
+    // loop to add things in to merged
     for(int i = 0, j = 0; i < size1 && j < size2; )
     {
-        if(array1[i] < array2[j]) // left array is smaller
+        if(array1[i] < array2[j]) // left array element is smaller
         {
             *(merged + k) = array1[i];
             k++;
             i++;
         }
-        else if(array1[i] > array2[j]) // right array is smaller
+        else if(array1[i] > array2[j]) // right array element is smaller
         {
             *(merged + k) = array2[j];
             k++;
@@ -174,7 +180,7 @@ int* merge(int array1[], int size1, int array2[], int size2)
                 k++;
             }
         }
-
+        // for the other side
         if(j == size2 && i != size1)
         {
             for( ; i < size1; i++)
@@ -183,28 +189,9 @@ int* merge(int array1[], int size1, int array2[], int size2)
                 k++;
             }
         }
-
-
-/*** Try to use memcpy ***/
-/*
-        // copy one thing if one side is done
-        if(i == size1)
-        {
-            memcpy((merged + k), (array2 + j), sizeof(int) * (size2 - j));
-            j = size2 - 1;
-            k = k + (size2 - j);
-        }
-
-        if(j == size2)
-        {
-            memcpy((merged + k), (array1 + i), sizeof(int) * (size1 - i));
-            i = size1 - 1;
-            k = k + (size1 - i);
-        }
-*/
-
     }
 
+    // free the two sides of what became the merged array (assume they are malloc'd!)
     free(array1);
     free(array2);
 
@@ -218,13 +205,18 @@ int* merge(int array1[], int size1, int array2[], int size2)
             return resized; //duplicates removed
     }
 }
+
 /*
  * Heapsort Sort
  */
 
+/*** PARTITION ***/
+
 /*
  * Quicksort Sort
  */
+
+/*** DISTRIBUTIVE ***/
 
 /*
  * Radix Sort

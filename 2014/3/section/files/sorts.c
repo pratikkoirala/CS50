@@ -88,8 +88,10 @@ int main(void)
 
     // get time of merge sort
     getrusage(RUSAGE_SELF, &before);
-    sort(big_array4, size);
+    int* arr_ptr4 = sort(big_array4, size);
     getrusage(RUSAGE_SELF, &after);
+
+    free(arr_ptr4);
 
     // calculate time
     double time4 = calculate(&before, &after);
