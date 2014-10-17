@@ -96,7 +96,6 @@ int main(void)
 
     // print out time
     printf("Merge Sort runs in: %f Seconds\n", time4);
-
 }
 
 /**

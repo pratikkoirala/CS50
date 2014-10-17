@@ -109,9 +109,28 @@ int* sort(int array[], int size)
         return array;
     else
     {
-        int* left_array = malloc(size/2); // malloc memory for left array
-        int* right_array = malloc(size/2);
-        return merge(sort(memcpy(left_array, array, size/2), size/2), size/2, sort(memcpy(right_array, array + size/2, size/2), size/2), size/2);
+        int* left_array = malloc(sizeof(int) * size/2); // malloc memory for left array
+        int* right_array = malloc(sizeof(int) * size/2);
+
+        int size1, size2;
+
+        if(size % 2 != 0)
+        {
+            size1 = size/2;
+            size2 = size/2 + 1;
+        }
+        else
+        {
+            size1 = size/2;
+            size2 = size/2;
+        }
+
+        int* sorted1 = sort(memcpy(left_array, array, sizeof(int) * size1), size1);
+        int* sorted2 = sort(memcpy(right_array, array + size1, sizeof(int) * size2), size2);
+
+        return merge(sorted1, size1, sorted2, size2);
+
+//        return merge(sort(memcpy(left_array, array, sizeof(int) * size/2), size/2), size/2, sort(memcpy(right_array, array + size/2, sizeof(int) * size/2), size/2), size/2);
     }
 }
 
@@ -146,22 +165,48 @@ int* merge(int array1[], int size1, int array2[], int size2)
             j++;
         }
 
+        // copy remainder if one side is done
+        if(i == size1 && j != size2)
+        {
+            for( ; j < size2; j++)
+            {
+                *(merged + k) = array2[j];
+                k++;
+            }
+        }
+
+        if(j == size2 && i != size1)
+        {
+            for( ; i < size1; i++)
+            {
+                *(merged + k) = array1[i];
+                k++;
+            }
+        }
+
+
+/*** Try to use memcpy ***/
+/*
         // copy one thing if one side is done
         if(i == size1)
         {
-            memcpy(merged + k, (array2), sizeof(int) * (size2 - j));
+            memcpy((merged + k), (array2 + j), sizeof(int) * (size2 - j));
             j = size2 - 1;
-            k = k + (size2 - 1 - j);
+            k = k + (size2 - j);
         }
 
         if(j == size2)
         {
-            memcpy(merged + k, (array1), sizeof(int) * (size1 - i));
+            memcpy((merged + k), (array1 + i), sizeof(int) * (size1 - i));
             i = size1 - 1;
-            k = k + (size2 - 1 - i);
+            k = k + (size1 - i);
         }
+*/
 
     }
+
+    free(array1);
+    free(array2);
 
     if(k == (size1 + size2))
         return merged; // no duplicates
