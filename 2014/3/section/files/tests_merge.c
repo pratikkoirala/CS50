@@ -20,6 +20,8 @@ int main(void)
 
     int* ptr = sort(array, ALOT);
 
+
+    // this is printing out where the repeats would be!
     for(int i = 0; i < ALOT; i++)
     {
         printf("%i\n", *(ptr + i));

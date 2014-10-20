@@ -5,16 +5,13 @@
 #include <stdio.h>
 #include "helpers.c"
 
-#define ALOT 100
+#define ALOT 1000
 #define LIMIT 65536
 
 int main(void)
 {
     // initialize a big array
     int big_array[ALOT];
-
-    // seed random
-//    srand((long int) time(NULL));
 
     // insert random ints into array
     for(int i = 0; i < ALOT; i++)

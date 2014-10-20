@@ -104,7 +104,7 @@ int* insertion_sort(int array[], int size)
 /*
  * Merge Sort [Divide and Conquer] - uses 2 fuctions: the first function breaks down the array into ever smaller chunks until you hit
  * a size of 1; while the second part compares the chunks and builds an array back up. This comparison algorithm is
- * about as fast as it gets O & Omega of nlog(n). STILL NEED TO LOOK AT, ERRORS WITH SOME BIG NUMBERS
+ * about as fast as it gets Big O & Omega of nlog(n). STILL NEED TO LOOK AT, ERRORS WITH SOME BIG NUMBERS
  */
 int* sort(int array[], int size)
 {
@@ -113,9 +113,6 @@ int* sort(int array[], int size)
         return array;
     else
     {
-        int* left_array = malloc(sizeof(int) * size/2); // malloc memory for left array
-        int* right_array = malloc(sizeof(int) * size/2); // for right array
-
         int size1, size2; // size variables in case size is odd
 
         if(size % 2 != 0) // odd size
@@ -128,6 +125,9 @@ int* sort(int array[], int size)
             size1 = size/2;
             size2 = size/2;
         }
+
+        int* left_array = malloc(sizeof(int) * size1); // malloc memory for left array
+        int* right_array = malloc(sizeof(int) * size2); // for right array
 
         int* sorted1 = sort(memcpy(left_array, array, sizeof(int) * size1), size1); // sort left side
         int* sorted2 = sort(memcpy(right_array, array + size1, sizeof(int) * size2), size2); // sort right
@@ -153,40 +153,32 @@ int* merge(int array1[], int size1, int array2[], int size2)
     {
         if(array1[i] < array2[j]) // left array element is smaller
         {
-            *(merged + k) = array1[i];
-            k++;
-            i++;
+            *(merged + k++) = array1[i++];
         }
         else if(array1[i] > array2[j]) // right array element is smaller
         {
-            *(merged + k) = array2[j];
-            k++;
-            j++;
+            *(merged + k++) = array2[j++];
         }
-        else // elements in both array are equal (so omit one)
+        else // elements in both array are equal
         {
-            *(merged + k) = array1[i];
-            k++;
-            i++;
-            j++;
+            *(merged + k++) = array1[i++];
+            *(merged + k++) = array2[j++];
         }
 
         // copy remainder if one side is done
         if(i == size1 && j != size2)
         {
-            for( ; j < size2; j++)
+            for( ; j < size2; j++, k++)
             {
                 *(merged + k) = array2[j];
-                k++;
             }
         }
         // for the other side
         if(j == size2 && i != size1)
         {
-            for( ; i < size1; i++)
+            for( ; i < size1; i++, k++)
             {
                 *(merged + k) = array1[i];
-                k++;
             }
         }
     }
@@ -195,6 +187,13 @@ int* merge(int array1[], int size1, int array2[], int size2)
     free(array1);
     free(array2);
 
+    return merged;
+
+/*
+ * Uncomment if you'd like to omit duplicates
+ */
+
+/*
     if(k == (size1 + size2))
         return merged; // no duplicates
     else
@@ -204,6 +203,7 @@ int* merge(int array1[], int size1, int array2[], int size2)
             free(merged);
             return resized; //duplicates removed
     }
+*/
 }
 
 /*
