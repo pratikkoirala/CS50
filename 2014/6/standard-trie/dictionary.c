@@ -8,6 +8,9 @@
  ***************************************************************************/
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 
@@ -15,19 +18,52 @@
 typedef struct node
 {
     bool is_word;
-    struct node* children[26];
+    struct node* children[27];
 } node;
 
 // counter for size
 int count = 0;
+
+// prototypes
+node* insert(char c, node* ptr);
+char* to_lower(char* s);
+void rec_unload(node* ptr);
+
+// root node
+node root;
 
 /**
  * Returns true if word is in dictionary else false.
  */
 bool check(const char* word)
 {
-    // TODO
-    return false;
+    char* lower = to_lower((char*) word);
+
+    int i = 0;
+
+    node* ptr = &root;
+
+    while(lower[i] != '\0')
+    {
+        if(ptr == NULL)
+        {
+            free(lower);
+            return false;
+        }
+
+        if(lower[i] == '\'')
+            ptr = ptr->children[26];
+        else
+            ptr = ptr->children[lower[i] - 'a'];
+        i++;
+    }
+
+    free(lower);
+
+    if(ptr == NULL || ptr->is_word == false)
+        return false;
+    else
+        return true;
 }
 
 /**
@@ -42,26 +78,32 @@ bool load(const char* dictionary)
     if(fp == NULL)
         return false;
 
-    // root node
-    node* root = malloc(sizeof(node));
+    // buffer
+    char buffer[LENGTH + 1];
 
-
-    // use fscanf to get the string, then break it down?
-    int c = fgetc(fp);
-
-    while(c != EOF)
+    // use fscanf to get the string, then break it down
+    while(fscanf(fp, "%s", buffer) == 1)
     {
-        int index = c = 'a';
 
-        if(root->children[index] == NULL)
+        // set a node ptr pointing to root
+        node* ptr = &root;
+
+        // insert it in the trie
+        for(int i = 0; buffer[i] != '\0'; i++)
         {
-            node*new_node = malloc(sizeof(node));
-            
-            root->
+            ptr = insert(buffer[i], ptr);
         }
+
+        // marker that this is a new word
+        if(ptr->is_word == false)
+            ptr->is_word = true;
+
+        count++;
     }
 
-    return false;
+    fclose(fp);
+
+    return true;
 }
 
 /**
@@ -77,6 +119,66 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
-    return false;
+    node* ptr = &root;
+
+    for(int i = 0; i < 27; i++)
+        if(ptr->children[i] != NULL)
+            rec_unload(ptr->children[i]);
+
+    return true;
+}
+
+
+// pass it a pointer to the blocks root points to (27)
+void rec_unload(node* ptr)
+{
+    for(int i = 0; i < 27; i++)
+    {
+        if(ptr->children[i] != NULL)
+            rec_unload(ptr->children[i]);
+    }
+
+    free(ptr);
+}
+
+/**
+ * Insert a character into trie
+ */
+node* insert(char c, node* ptr)
+{
+    int index = 0;
+
+    if(c == '\'')
+        index = 26;
+    else
+        index = c - 'a';
+
+    if(ptr->children[index] == NULL)
+    {
+        node* new_ptr = malloc(sizeof(node));
+        ptr->children[index] = new_ptr;
+    }
+
+    // return ptr to new node
+    return ptr->children[index];
+}
+
+/**
+ * Convert string to lower case
+ */
+char* to_lower(char* s)
+{
+    char* tmp = malloc(LENGTH + 1);
+
+    int i = 0;
+
+    while(s[i] != '\0')
+    {
+        tmp[i] = tolower(s[i]);
+        i++;
+    }
+
+    tmp[i] = '\0';
+
+    return tmp;
 }
