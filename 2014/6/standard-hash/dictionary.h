@@ -16,6 +16,8 @@
 // (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
 #define LENGTH 45
 
+#define SIZE_TABLE 26
+
 /**
  * Returns true if word is in dictionary else false.
  */
@@ -35,5 +37,15 @@ unsigned int size(void);
  * Unloads dictionary from memory.  Returns true if successful else false.
  */
 bool unload(void);
+
+/**
+ * Bad hash function
+ */
+int hash_function(char* s);
+
+/**
+ * tolower a string
+ */
+char* to_lower(char* s);
 
 #endif // DICTIONARY_H
