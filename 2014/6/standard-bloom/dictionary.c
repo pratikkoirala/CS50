@@ -144,7 +144,7 @@ bool unload(void)
 }
 
 /**
- * * HASH FUNCTIONS
+ * HASH FUNCTIONS
  */
 
 // Paul Hsieh's SuperFastHash
