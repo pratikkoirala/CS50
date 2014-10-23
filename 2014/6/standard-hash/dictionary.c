@@ -150,7 +150,7 @@ int hash_function(char* s)
 
 
 /**
- * Conver string to lower case
+ * Convert string to lower case
  */
 char* to_lower(char* s)
 {
