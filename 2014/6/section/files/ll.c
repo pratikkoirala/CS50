@@ -24,7 +24,7 @@ int main(void)
     node2 -> i = 2;
     node2 -> next = NULL;
 
-    /*** INSERT A NEW NODE3 AT THE FRONT ***/
+    /*** INSERT A NEW NODE4 AT THE FRONT ***/
     // TODO
 
     /*** DELETE NODE1 ***/
