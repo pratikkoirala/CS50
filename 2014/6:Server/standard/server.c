@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
             {
                 error(414);
                 continue;
-            }   
+            }
             char line[needle - haystack + 2 + 1];
             strncpy(line, haystack, needle - haystack + 2);
             line[needle - haystack + 2] = '\0';
@@ -154,9 +154,9 @@ int main(int argc, char* argv[])
             char path[] = "TODO";
 
             // TODO: ensure path exists
-            
+
             // TODO: ensure path is readable
- 
+
             // TODO: extract path's extension
             char extension[] = "TODO";
 
@@ -240,7 +240,7 @@ int main(int argc, char* argv[])
 
                 // TODO: respond to client
             }
-            
+
             // announce OK
             printf("\033[32m");
             printf("HTTP/1.1 200 OK");
