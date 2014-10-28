@@ -36,7 +36,7 @@ IP Address: Every device (server, computer, phone, etc) connected to the network
 has a label that identifies it; this is its IP address. This is essentially a mailing 
 address that lets data know where to go. An IP address is in the form "nnn.nnn.nnn.nnn" 
 but can be renamed with something like google.com, facebook.com, etc (using Domain Name Service; DNS).
-    - DNS is simply a table that keeps track of names, like facebook.com, and its IP address
+    - DNS is simply a table that keeps track of names, like facebook.com, and its IP address (173.252.120.6)
 
 So, if I'm trying to send someone a piece of data, say an image for example, that image will: 
 
@@ -66,6 +66,25 @@ where to send the data.
 
 *LOOKING UP A PAGE (AKA USING HTTP)*
 
-HTTP is a convention - it's how computers and servers talk with one another (kind of like a handshake!). When my
-computer (client) requests a webpage from a server, I send a requent and get back a response. The exact structure
-of this conversation is specified in the application layer (the world wide web) by HTTP. 
+HTTP (Hypertext Transfer Protocol) is a convention (the hypertext is usually HTML) - it's how computers and servers 
+talk with one another (kind of like a handshake!). When my computer (client) requests a webpage from a server, I 
+send a requent and get back a response. The exact structure of this conversation is specified in the application 
+layer (the world wide web) by HTTP. 
+
+    1) You type in a domain name, such as facebook.com, whose IP address is found through DNS
+    
+    2) The web browser connects to the server via the protocol stack (discussed above) and sends an
+       HTTP request for a webpage
+       
+    3) The web server checks to see if the page exists; if it does it sends it, otherwise it returns a 
+       404 error (page not found)
+    
+    4) The web browser receives the page then CLOSES THE CONNECTION
+
+    5) The browser parses the page, and if additional elements are needed, such as an image, a new 
+       request is sent to the server.
+
+    6) For each request, a new connection and request must be made. Once a page is completely loaded,
+       your browser renders the page!
+
+
