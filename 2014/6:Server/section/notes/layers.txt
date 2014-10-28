@@ -87,4 +87,17 @@ layer (the world wide web) by HTTP.
     6) For each request, a new connection and request must be made. Once a page is completely loaded,
        your browser renders the page!
 
+*PUTTING IT ALL TOGETHER*
 
+I want to go to www.facebook.com:
+
+    1) My computer is connected to the world wide web, which is connected to local ISPs, regional ISPs, 
+       NSPs, NAPs, etc.
+       
+    2) My computer connects through an access point (AP) to a switch that resolves Dynamic Host Configuration
+       Protocol (DHCP), which dynamically generates an IP address for my device, and Domain Name System (DNS) 
+       that finds an IP address for a domain name.
+
+    3) At the application layer, you are connecting to a server via HTTP. 
+    
+    4) Your client makes a GET request to the server, which has to go through the protocol stack.
