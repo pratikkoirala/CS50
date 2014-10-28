@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
         return 2;
     }
 
-    // start server
+    // start server (with a socket)
     start(port, argv[optind]);
 
     // listen for SIGINT (aka control-c)
@@ -258,6 +258,10 @@ bool connected(void)
     struct sockaddr_in cli_addr;
     memset(&cli_addr, 0, sizeof(cli_addr));
     socklen_t cli_len = sizeof(cli_addr);
+
+    // here, the server is accepting a connection and passing to cfd, the client's socket
+    // an int used to refer to the socket. So now, the server and client are connected via
+    // this socket mechanism.
     cfd = accept(sfd, (struct sockaddr*) &cli_addr, &cli_len);
     if (cfd == -1)
     {
@@ -584,7 +588,8 @@ void start(short port, const char* path)
     printf("Using %s for server's root", root);
     printf("\033[39m\n");
 
-    // create a socket
+    // create a socket. AF_INET: IPv4, SOCK_STREAM: reliable, two way,
+    // connection based stream
     sfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sfd == -1)
     {
