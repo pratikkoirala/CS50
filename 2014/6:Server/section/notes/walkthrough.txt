@@ -10,9 +10,16 @@ FUNCTIONS
 
 SOCKETS
 
+  servers -
     A socket is simply a way for a client and a server to connect and communicate.
     When we are setting up a server in start(), I'm (1) creating a socket, then
     (2) binding that socket to an address, and (3) listening for connections
     from a client. When a connection is made, the server (4) accepts the connection,
     as done in connected(), and then information can pass between the client and the
-    server.
+    server. The listening descriptor is a server side descriptor that is usually only
+    made once and can last for the entirety of the progrm. The connected descriptor
+    that returns after a call to accept() exists only as long as it takes for the server
+    to service a client request. (remember our HTTP model!)
+
+  clients -
+    (1) create a socket, and then (2) connect it to the server
