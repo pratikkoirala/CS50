@@ -151,7 +151,10 @@ int main(int argc, char* argv[])
             // separate method
             char method[LimitRequestLine];
             if(!strncpy(method, line, first_space - line))
+            {
                 error(400);
+                continue;
+            }
 
             // add terminating character
             method[first_space - line] = '\0';
@@ -162,7 +165,10 @@ int main(int argc, char* argv[])
             // separate request-target
             char request_target[LimitRequestLine];
             if(!strncpy(request_target, first_space + 1, second_space - first_space - 1))
+            {
                 error(400);
+                continue;
+            }
 
             // add terminating character
             request_target[second_space - first_space - 1] = '\0';
@@ -188,17 +194,17 @@ int main(int argc, char* argv[])
                 continue;
              }
 
-            // make sure request-line starts with a '/', is
+            // make sure request-line starts with a '/'
             if(request_target[0] != '/')
             {
                 error(501);
                 continue;
             }
 
-            // if request-target has more than just a '/' make sure it has a '?' and no '"'
+            // if request-target has more than just a '/'
             if(strlen(request_target) > 1)
             {
-                // also, make sure there is an extension
+                // make sure there is an extension
                 if(!strchr(request_target, '.'))
                 {
                     error(501);
@@ -220,16 +226,17 @@ int main(int argc, char* argv[])
                 continue;
             }
 
+            // make buffer for query
             char query[strlen(request_target)];
-            query[0] = '\0';
+
+            // make buffer for absolute_path
             char absolute_path[strlen(request_target)];
-            absolute_path[0] = '\0';
 
             // extract query from request-target
             if(!strchr(request_target, '?'))
             {
-                strcat(absolute_path, request_target);
-                strcat(query, "");
+                strcpy(absolute_path, request_target); // this will contain null terminator
+                strcpy(query, "\0");
             }
             else
             {
@@ -237,31 +244,30 @@ int main(int argc, char* argv[])
 
                 if(tmp[1] == '\0')
                 {
-                    strcat(absolute_path, request_target);
-                    strcat(query, "");
+                    strcpy(absolute_path, request_target);
+                    strcpy(query, "\0");
                 }
                 else
                 {
-                    strcat(query, strstr(request_target, &tmp[1]));
-                    printf("%i\n", tmp - request_target);
+                    // copy into query
+                    strcpy(query, strstr(request_target, &tmp[1]));
+
+                    // copy up to '?' into absolute path
                     strncpy(absolute_path, request_target, tmp - request_target);
+
+                    // add null terminator
                     absolute_path[tmp - request_target] = '\0';
                 }
             }
 
-            absolute_path[strlen(absolute_path)] = '\0';
 
-            printf("%s\n", absolute_path);
-
-            printf("%s\n", query);
-
+            // make buffer for path
             char temp_path[strlen(root) + strlen(absolute_path)];
-            temp_path[0] = '\0';
+
+            // copy root into temp_path, since if we concat right onto root, it will be forever changed
+            strcpy(temp_path, root);
 
             // concatenate root and absolute-path
-
-            strcat(temp_path, root);
-
             char* path = strcat(temp_path, absolute_path);
 
             // ensure path exists
@@ -280,23 +286,27 @@ int main(int argc, char* argv[])
 
             // extract path's extension
             char temp_extension[strlen(root) + strlen(absolute_path)];
-            temp_extension[0] = '\0';
 
+            // find location of '.'
             char* tmp = strchr(request_target, '.');
 
+            // find location of '?'
             char* tmp2 = strchr(request_target, '?');
 
+            // is request_target has both
             if(tmp && tmp2)
             {
+                // copy into extension "png", "jpg", "php", etc
                 strncpy(temp_extension, tmp + 1, tmp2 - tmp - 1);
+
+                // null terminate it
                 temp_extension[tmp2 - tmp - 1] = '\0';
             }
             else if (tmp)
-                strcat(temp_extension, tmp + 1);
+                strcpy(temp_extension, tmp + 1);
 
+            // copy into extension
             char* extension = temp_extension;
-
-            printf("%s\n", extension);
 
             // dynamic content
             if (strcasecmp("php", extension) == 0)
@@ -376,7 +386,7 @@ int main(int argc, char* argv[])
                     continue;
                 }
 
-
+                // print things out
                 if(dprintf(cfd, "HTTP/1.1 200 OK\r\n") < 0)
                     continue;
 
