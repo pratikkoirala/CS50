@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
             char* first_space = strchr(line, ' ');
 
             // separate method
-            char method[LimitRequestLine];
+            char method[needle - haystack + 1];
             if(!strncpy(method, line, first_space - line))
             {
                 error(400);
@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
             char* second_space = strchr(first_space + 1, ' ');
 
             // separate request-target
-            char request_target[LimitRequestLine];
+            char request_target[needle - haystack + 1];
             if(!strncpy(request_target, first_space + 1, second_space - first_space - 1))
             {
                 error(400);
@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
             char* end = strstr(second_space + 1, "\r\n");
 
             // separate HTTP-version
-            char http_version[LimitRequestLine];
+            char http_version[needle - haystack + 1];
             if(!strncpy(http_version, second_space + 1, end - second_space - 1))
             {
                 error(400);
