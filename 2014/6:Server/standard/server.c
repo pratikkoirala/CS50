@@ -145,20 +145,158 @@ int main(int argc, char* argv[])
             // log request-line
             printf("%s", line);
 
-            // TODO: validate request-line
+            // validate request-line; return pointer to first instance of space
+            char* first_space = strchr(line, ' ');
 
-            // TODO: extract query from request-target
-            char query[] = "TODO";
+            // separate method
+            char method[LimitRequestLine];
+            if(!strncpy(method, line, first_space - line))
+                error(400);
 
-            // TODO: concatenate root and absolute-path
-            char path[] = "TODO";
+            // add terminating character
+            method[first_space - line] = '\0';
 
-            // TODO: ensure path exists
+            // find next space
+            char* second_space = strchr(first_space + 1, ' ');
 
-            // TODO: ensure path is readable
+            // separate request-target
+            char request_target[LimitRequestLine];
+            if(!strncpy(request_target, first_space + 1, second_space - first_space - 1))
+                error(400);
 
-            // TODO: extract path's extension
-            char extension[] = "TODO";
+            // add terminating character
+            request_target[second_space - first_space - 1] = '\0';
+
+            // find "\r\n"
+            char* end = strstr(second_space + 1, "\r\n");
+
+            // separate HTTP-version
+            char http_version[LimitRequestLine];
+            if(!strncpy(http_version, second_space + 1, end - second_space - 1))
+            {
+                error(400);
+                continue;
+            }
+
+            // add terminating character
+            http_version[end - second_space - 1] = '\0';
+
+            // make sure there are no spaces in method, request-target, and HTTP-version
+            if(strchr(method, ' ') ||  strchr(request_target, ' ') || strchr(http_version, ' '))
+            {
+                error(400);
+                continue;
+             }
+
+            // make sure request-line starts with a '/', is
+            if(request_target[0] != '/')
+            {
+                error(501);
+                continue;
+            }
+
+            // if request-target has more than just a '/' make sure it has a '?' and no '"'
+            if(strlen(request_target) > 1)
+            {
+                // also, make sure there is an extension
+                if(!strchr(request_target, '.'))
+                {
+                    error(501);
+                    continue;
+                }
+            }
+
+            // make sure we are using method GET
+            if(strcasecmp(method, "GET"))
+            {
+                error(405);
+                continue;
+            }
+
+            // make sure we have the right version
+            if(strcasecmp(http_version, "HTTP/1.1"))
+            {
+                error(505);
+                continue;
+            }
+
+            char query[strlen(request_target)];
+            query[0] = '\0';
+            char absolute_path[strlen(request_target)];
+            absolute_path[0] = '\0';
+
+            // extract query from request-target
+            if(!strchr(request_target, '?'))
+            {
+                strcat(absolute_path, request_target);
+                strcat(query, "");
+            }
+            else
+            {
+                char* tmp = strchr(request_target, '?');
+
+                if(tmp[1] == '\0')
+                {
+                    strcat(absolute_path, request_target);
+                    strcat(query, "");
+                }
+                else
+                {
+                    strcat(query, strstr(request_target, &tmp[1]));
+                    printf("%i\n", tmp - request_target);
+                    strncpy(absolute_path, request_target, tmp - request_target);
+                    absolute_path[tmp - request_target] = '\0';
+                }
+            }
+
+            absolute_path[strlen(absolute_path)] = '\0';
+
+            printf("%s\n", absolute_path);
+
+            printf("%s\n", query);
+
+            char temp_path[strlen(root) + strlen(absolute_path)];
+            temp_path[0] = '\0';
+
+            // concatenate root and absolute-path
+
+            strcat(temp_path, root);
+
+            char* path = strcat(temp_path, absolute_path);
+
+            // ensure path exists
+            if(access(path, F_OK))
+            {
+                error(404);
+                continue;
+            }
+
+            // ensure path is readable
+            if(access(path, R_OK))
+            {
+                error(404);
+                continue;
+            }
+
+            // extract path's extension
+            char temp_extension[strlen(root) + strlen(absolute_path)];
+            temp_extension[0] = '\0';
+
+            char* tmp = strchr(request_target, '.');
+
+            char* tmp2 = strchr(request_target, '?');
+
+            if(tmp && tmp2)
+            {
+                strncpy(temp_extension, tmp + 1, tmp2 - tmp - 1);
+                temp_extension[tmp2 - tmp - 1] = '\0';
+            }
+            else if (tmp)
+                strcat(temp_extension, tmp + 1);
+
+            char* extension = temp_extension;
+
+            printf("%s\n", extension);
 
             // dynamic content
             if (strcasecmp("php", extension) == 0)
@@ -238,7 +376,21 @@ int main(int argc, char* argv[])
                     continue;
                 }
 
-                // TODO: respond to client
+
+                if(dprintf(cfd, "HTTP/1.1 200 OK\r\n") < 0)
+                    continue;
+
+                if(dprintf(cfd, "Connection: close\r\n") < 0)
+                    continue;
+
+                if(dprintf(cfd, "Content-Length: %i\r\n", length) < 0)
+                    continue;
+
+                if(dprintf(cfd, "Content-Type: %s\r\n\r\n", type) < 0)
+                    continue;
+
+                if (write(cfd, body, length) == -1)
+                    continue;
             }
 
             // announce OK
@@ -443,7 +595,27 @@ void handler(int signal)
  */
 const char* lookup(const char* extension)
 {
-    // TODO
+    if(!strcasecmp(extension, "css"))
+        return "text/css";
+
+    if(!strcasecmp(extension, "html"))
+        return "text/html";
+
+    if(!strcasecmp(extension, "gif"))
+        return "image/gif";
+
+    if(!strcasecmp(extension, "ico"))
+        return "image/x-icon";
+
+    if(!strcasecmp(extension, "jpg"))
+        return "image/jpeg";
+
+    if(!strcasecmp(extension, "js"))
+        return "text/javascript";
+
+    if(!strcasecmp(extension, "png"))
+        return "image/png";
+
     return NULL;
 }
 

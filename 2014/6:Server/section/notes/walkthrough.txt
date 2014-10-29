@@ -8,6 +8,17 @@ FUNCTIONS
     start() - This is a function we create to start a server. It makes use,
               extensively, of sockets
 
+    strchr() - [char * strchr(const char* s, int c)]: returns a pointer to the first
+               occurence of character c in char* s.
+    
+    strcpy() - [char* strcpy(char* dest, const char* src)]: copies from src to dest
+    
+    strncpy() - [char* strncpy(char* dest, const char* src, size_t n)]: at most n
+                bytes are copied from src to dest
+    
+    strstr() - [char* strstr(const char* haystack, const char* needle)]: returns a 
+               pointer to the first character of substring needle in haystack 
+
 SOCKETS
 
   servers -
