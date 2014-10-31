@@ -19,6 +19,9 @@ FUNCTIONS
     strstr() - [char* strstr(const char* haystack, const char* needle)]: returns a 
                pointer to the first character of substring needle in haystack 
 
+    You can just use char*'s for much of this, but it is better and usually safer to have buffers,
+    especially for the final path, otherwise you could be writing over memory you don't want to!
+
 SOCKETS
 
   servers -
