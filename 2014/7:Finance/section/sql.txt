@@ -36,3 +36,7 @@ select
 delete
 
     DELETE FROM my_table WHERE name="gabe" (deletes row)
+
+drop
+
+    DROP TABLE section
