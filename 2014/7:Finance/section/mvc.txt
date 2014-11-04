@@ -1,0 +1,9 @@
+MVC
+
+What it is and why we use it
+
+Controllers (what are controllers in the pset)
+
+Model (data)
+
+View (templates)

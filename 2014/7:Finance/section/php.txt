@@ -1,0 +1,9 @@
+PHP
+
+creating arrays
+
+passing information back and forth
+
+global variables
+
+

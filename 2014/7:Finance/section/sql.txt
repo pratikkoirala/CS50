@@ -1,0 +1,11 @@
+SQL
+
+creating tables
+
+insert
+
+select
+
+delete
+
+update
