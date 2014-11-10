@@ -1,13 +1,13 @@
 <?php
 
-    // configuration
+    // configuration (require is the same as #include except it'll throw an error)
     require("../includes/config.php"); 
 
     // if user reached page via GET (as by clicking a link or via redirect)
     if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
-        // else render form
-        render("login_form.php", ["title" => "Log In"]);
+        // else render form; login_form.php now has access to a variable $title that has value "Log In"
+        render("login_form.php", ["title" => "Log in"]);
     }
 
     // else if user reached page via POST (as by submitting a form via POST)

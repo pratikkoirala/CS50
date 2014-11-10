@@ -24,6 +24,18 @@
     width: auto;
 }
 
+.container #middle ul.nav.nav-pills
+{
+    width: 65%; /* change width of box */
+}
+
+.container #middle ul.nav.nav-pills li
+{
+    display: inline;
+    margin: 0px auto;
+    float: right; /* float to the right of shortened box to appear centered*/
+}
+
 #bottom
 {
     /* shrink bottom's font size */

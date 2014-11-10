@@ -7,10 +7,10 @@
             <input class="form-control" name="password" placeholder="Password" type="password"/>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Log In</button>
+            <button type="submit" class="btn btn-default">Log in</button>
         </div>
     </fieldset>
 </form>
 <div>
-    or <a href="register.php">register</a> for an account
+    or <a href="register.php">register</a> here
 </div>

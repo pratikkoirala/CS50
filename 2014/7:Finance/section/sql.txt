@@ -35,7 +35,7 @@ select
 
 delete
 
-    DELETE FROM my_table WHERE name="gabe" (deletes row)
+    DELETE FROM my_table WHERE name="GOOG" (deletes row)
 
 drop
 
