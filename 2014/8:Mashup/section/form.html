@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <head>
+        <title>TF</title>
+        <link rel="stylesheet" type="text/css" href="styles.css"/>
+    </head>
+    <body>
+        <form action="index.html" id="dabest" method="get">
+                Who's the best TF EVAR: <input name="tf" type="text"/>
+            <br/>
+            <input type="submit" value="Vote"/>
+        </form>
+        <script>
+            var form = document.getElementById("dabest"); 
+        
+            // form is the HTML tag, and when I submit I want to do a function
+            form.onsubmit = function()
+            {            
+                if(form.tf.value == "" || ((form.tf.value).localeCompare("Daven")))
+                {
+                    alert("Nope! Try again!");
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

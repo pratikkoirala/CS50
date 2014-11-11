@@ -1,13 +1,18 @@
 <form action="sell.php" method="post">
     <fieldset>
         <div class="form-group">
-            <input autofocus class="form-control" name="symbol" placeholder="Symbol" type="text"/>
+            <select class="form-control" name="symbol">
+            <?php foreach($stocks as $stock): ?>
+                <option value=""></option>
+                <option value="<?php echo $stock ?>"><?=$stock?></option>       
+            <?php endforeach ?>
+            </select>
         </div>
         <div class="form-group">
-            <input class="form-control" name="shares" placeholder="Shares" type="text"/>
+            <input autofocus class="form-control" name="shares" placeholder="Shares" type="text"/>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Sell!</button>
+            <button type="submit" class="btn btn-default">Sell</button>
         </div>
     </fieldset>
 </form>

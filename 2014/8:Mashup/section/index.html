@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <head>
+        <title>Lights!</title>
+        <script>            
+            // taken from stackoverflow: http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
+            function getRandomColor() 
+            {
+                var letters = '0123456789ABCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) 
+                {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                
+                return color;
+            }
+            
+            function changeBG()
+            {
+                document.body.style.background = getRandomColor();
+                setTimeout("changeBG()", 1500);
+            };
+
+        </script>
+    </head>
+    <body>
+        <button onclick="changeBG()">Party!</button>
+    </body>
+</html>

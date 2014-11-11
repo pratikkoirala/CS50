@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+    <head>
+        <title>Add!</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    <script>
+        function add()
+        {
+            // get number isn't the body
+            var number = document.getElementById("add").innerHTML;
+
+            var inumber = parseInt(number);
+
+            console.log(number);
+        
+            inumber = inumber + 2;
+
+            document.getElementById("add").innerHTML = inumber;
+
+            // switch to another window
+            if(inumber == 50)
+                window.location.replace("/index.html");
+        }
+    </script>
+    </head>
+    <body>
+        <p>
+            <button id="add" onclick="add()">2</button>
+        </p>
+    </body>
+</html>

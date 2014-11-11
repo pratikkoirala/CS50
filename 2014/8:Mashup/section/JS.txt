@@ -1,0 +1,29 @@
+JS is, seemingly, a multi-paradigm language.
+
+    C is procedural:        you basically tell a computer, step by step, what to do. It is also technically imperative since
+                            it makes references to the state of the execution environment
+                     
+    Ocamly is functional:   although you can do things that have to deal with OO programming and you can have variables,
+                            so these imperative elements, it tries to accomplish everything solely through functions.
+                            For example, instead of saving the state of a varibale, you simply ALWAYS pass that variable 
+                            as a parameter to subsequent functions.
+                                - provides things like type matching, etc
+                            
+    Java, C++, are OO:      They make use of objects, which contain data along with all applicable methods pertinent for 
+                            that "object"
+
+
+    We can't say JS is one thing, rather it is seemingly multi-paradigm; it has characteristics of OO programming, procedural
+    programming, and functional programming.
+        - it's dynamically typed
+        - it's interpreted (i.e. not compiled)
+        - and it's CLIENT side instead of SERVER side like PHP
+            - being client side means it's going to be faster, since it doesn't have to communicate with some external device (server).
+              So, for example, you don't have to use the function apologize() when a user submits something wrong. Rather, you can 
+              dynamically react right on the user's client.
+             
+
+    How is JQuery and Ajax (Asynchronous Javascript and XML) different from just plain Javascript? Well, where javascript is never really
+    refreshing your page by never making additional GET or POST requests to the server, AJAX will also never refresh your webpage but 
+    it'll be making new HTTP requests to the SERVER, therefore, it is able to continuously ask for more data!
+        - just like on some things like google maps!

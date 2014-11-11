@@ -1,0 +1,11 @@
+form, p
+{
+    text-align: center;
+}
+
+button
+{
+    height: 50px;
+    Width: 100px;
+    font-size: large;
+}
