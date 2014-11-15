@@ -2,10 +2,11 @@
     <fieldset>
         <div class="form-group">
             <select class="form-control" name="symbol">
-            <?php foreach($stocks as $stock): ?>
                 <option value=""></option>
-                <option value="<?php echo $stock ?>"><?=$stock?></option>       
-            <?php endforeach ?>
+                <?php foreach($stocks as $stock): ?>
+                    <?=$value = $stock["stock"];?>
+                    <option value="<?php echo $value ?>"><?=$value?></option>
+                <?php endforeach ?>
             </select>
         </div>
         <div class="form-group">

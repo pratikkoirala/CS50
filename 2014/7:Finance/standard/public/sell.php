@@ -12,7 +12,7 @@
 
         foreach($rows as $row)
         {
-            $stocks = [
+            $stocks[] = [
                         "stock" => $row["symbol"]
                       ];
         }
@@ -60,8 +60,11 @@
             // amount of shares user has
             $row = $rows[0];
 
+            // if user tries to sell too much stock
             if($row["shares"] < $_POST["shares"])
-                apologize("Sorry! you don't have that much stock!");
+                apologize("Sorry! you don't have that much stock!"); /* this will exit */
+
+            // sell all of a particular stock
             else if($row["shares"] == $_POST["shares"])
             {
                 if(query("DELETE FROM portfolio WHERE id = ? AND symbol = ?", $_SESSION["id"], $stock["symbol"]) === false) 
@@ -69,6 +72,7 @@
                 else
                     render("sold.php", ["title" => "Sold!", "symbol" => $stock["symbol"], "shares" => $_POST["shares"], "profit" => $price]);
             }
+            // sell only some of a stock
             else
             {
                 if(query("UPDATE portfolio SET shares = shares - ? WHERE id = ? AND symbol = ?", $_POST["shares"], $_SESSION["id"], $_POST["symbol"]) === false) 
@@ -76,6 +80,10 @@
                 else
                     render("sold.php", ["title" => "Sold!", "symbol" => $_POST["symbol"], "shares" => $_POST["shares"], "profit" => $profit]);
             }
+
+            // update history table
+            if(query("INSERT INTO history VALUES (?, ?, ?, ?, NOW(), ?)", $_SESSION["id"], $stock["symbol"], $_POST["shares"], "SELL", $profit) === false)
+                apologize("Couldn't update history");
         }
     }
 ?>

@@ -31,7 +31,21 @@
             apologize("you don't have enough money!");
         else
         {
-            // buy stock
+            if(query("UPDATE users SET cash = cash - ? WHERE id = ?", ($lookup["price"] * $_POST["shares"]), $_SESSION["id"]) === false)
+                apologize("Can't update user's cash");
+
+            if(query("INSERT INTO portfolio (id, symbol, shares) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE shares = shares + ?", $_SESSION["id"],
+                                                                                                                                $lookup["symbol"],
+                                                                                                                                $_POST["shares"],
+                                                                                                                                $_POST["shares"]
+                                                                                                                                ) === false)
+                apologize("Couldn't update table");
+                
+            $profit = -($lookup["price"] * $_POST["shares"]);
+
+            // update history table
+            if(query("INSERT INTO history VALUES (?, ?, ?, ?, NOW(), ?)", $_SESSION["id"], $lookup["symbol"], $_POST["shares"], "BUY", $profit) === false)
+                apologize("Couldn't update history");
 
             redirect("/");
         }
