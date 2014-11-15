@@ -1,0 +1,18 @@
+
+    1) What JS is
+    2) What is the DOM
+        - do an example via an old quiz
+    3) JS examples
+        - do jquery example on quiz and why it is so much easier
+    4) What AJAX and JQuery is
+        - How it uses XMLHTTPREQUEST and what JSON is
+    5) some parts of the pset explained
+        - import.php (doesn't use a .csv file, using instead tabs to demarcate fields)
+            1) Read in file fopen()
+                - check if fopen() === false!
+            2) get its .csv, though not really! fgetcsv() - fgetcsv($filename, 0, "\t");
+                - returns single line in an array format
+            3) query, perhaps via some for loop, into your SQL table
+            4) fclose() file
+        - search.php
+            1) query 
