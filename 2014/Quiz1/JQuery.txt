@@ -31,8 +31,11 @@ $("#someID")         -  this is the exact same as the JS call document.getElemen
                             
                        then a call to $("someID") will return: <p>Attaining the Ballmer Peak</p>, or basically,
                        some DOM element.
+                       
+                       For class: document.getElementsByClassName("className");
+                       For tag: document.getElementsByTagName("tagName");
                       
-$("#someID").html() - get the HTML of some DOM element (the same as document.getElementById.innerHTML) So, where the above is going to return a DOM element, calling
+$("#someID").html() - get the HTML of some DOM element (the same as document.getElementById("someID").innerHTML) So, where the above is going to return a DOM element, calling
                       html() on it will return "<p>Attaining the Ballmer Peak</p>"
 
 html("string")      - in order to change the HTML

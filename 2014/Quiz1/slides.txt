@@ -1,0 +1,58 @@
+Statuses -
+
+2xx - everything went ok
+    200: everything went well! you're at the page you want to be at
+
+3xx - redirection
+    301: Moved! So, for example, if you type in http://cs50.net, you're 
+         going to be automatically redirected to a page with https
+    302: What keeps happening to me!
+    304: When something, like an image, is cached so you, so the server 
+         doesn't have to resend all the data (cat.html for example)
+    
+4xx - client error    
+    400: Bad request (if I sent malformed JSON, for example)
+    403: you haven't set permissions correctly
+    404: that file just doesn't exist!
+    
+5xx - server error
+    500: something is wrong with the server; some configuration is wrong
+    503: overloaded (some of you got this with your pset8 when you kept 
+         querying Google for news!)
+
+
+Slide 61: The alert is going to pop up before the body of the DOM is printed, 
+          which makes sense since you aren't waiting for the window to load
+
+Slide 65: thirdElement == "JS"; arr2len == 3
+
+Slide 77:   (1) $.getJSON() - this is the AJAX call
+            (2) .done() will run if the JSON call returns succesfully; inside the function, you 
+                are passing data, which is the JSON object you get back from your AJAX call, 
+                textStatus - just something describing the status, and jqXHR (which is the XHR object)
+            (3) .fail() which will run of the AJAX call fails
+            
+Security
+
+    Man-in-the-middle - when someone is literally in between you (your client) and the server you are
+                        trying to communicate with. There are lots points of vulnerability, like routers,
+                        DNS servers, etc, and if someone malicious can trick one of these pieces into sending
+                        your information to them, suddenly they might have useful personal information (like a
+                        session ID which they can then use identify as you on some website)
+                        
+                        SSL (secure sockets layer) protects against session hijacking since, although some data 
+                        might be jacked by a man in the middle, it should be encrypted so it's unusable. 
+
+    
+    Cross-site 
+    request forgery  - clicking a link that does something you don't expect (like selling stocks in pset7)
+    
+    Cross-site
+    scripting        - if I don't escape things (remember SQL Injection attacks!)
+    
+    
+    
+    Verizon (headers) - adding additional headers that identify your phone, so even if you delete your cookies,
+                        Verizon still knows who you are and what you're looking at
+                       
+         
