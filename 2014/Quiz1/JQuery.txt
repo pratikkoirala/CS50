@@ -1,0 +1,48 @@
+JQuery is simply a Javascript library that's supposed to help simplfy and streamline certain functions.
+
+
+The '$' signifies JQuery (don't be confused with its usage in PHP where it identifies a variable!)
+
+
+$("#id"); $("tag"); $(".class");
+
+the '.' is like a function called on some object, element, etc
+
+$(document).ready()  -  a JQuery function that basically checks whether the page's DOM has fully loaded.
+                       The reason you do this is because when a page runs, it's basically going to run
+                       sequentially, from top to bottom (basically). Let's say you are altering some part
+                       of the DOM in your JQuery, well that call is probably going to be at the top of your
+                       code in a <head> tag, which means when it runs if you fail to make sure the DOM is ready
+                       you're going to be trying to alter a DOM that's not there.
+                      
+                       // function here is some anonymous function
+                       $(document).ready(function() {
+                      
+                         // code
+                      
+                       });
+
+$("#someID")         -  this is the exact same as the JS call document.getElementById("someID"). So, for example,
+                        if I have some html tag like:
+                      
+                            <div id="SB">
+                                <p>Attaining the Ballmer Peak</p>       
+                            </div>
+                            
+                       then a call to $("someID") will return: <p>Attaining the Ballmer Peak</p>, or basically,
+                       some DOM element.
+                      
+$("#someID").html() - get the HTML of some DOM element (the same as document.getElementById.innerHTML) So, where the above is going to return a DOM element, calling
+                      html() on it will return "<p>Attaining the Ballmer Peak</p>"
+
+html("string")      - in order to change the HTML
+
+.submit()           - called when a form element is submitted.
+
+.val()              - will get whatever value was in a select or text area, so a call like $("someID").submit(function () { var value = $("name").val(); }); will
+                      get the DOM element with id = "someID" (probably a form); when this form is submitted (detected with .submit()) I then want to call an
+                      anonymous function where in a variable called 'value' I store whatever val() was inputted into the textarea in the form.
+
+return false        - will call three separate functions (1) event.preventDefault() - so, let's say I have a link to a webpage, if in my JS I reference that link
+                      and then return false (preventDefault) that link will no longer redirect. (2) event.stopPropagation() - prevent parent handlers from being 
+                      notified of an event firing. (3) stop callback execution
