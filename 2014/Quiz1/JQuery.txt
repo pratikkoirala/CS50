@@ -8,7 +8,7 @@ $("#id"); $("tag"); $(".class");
 
 the '.' is like a function called on some object, element, etc
 
-$(document).ready()  -  a JQuery function that basically checks whether the page's DOM has fully loaded.
+$(document).ready()  - a JQuery function that basically checks whether the page's DOM has fully loaded.
                        The reason you do this is because when a page runs, it's basically going to run
                        sequentially, from top to bottom (basically). Let's say you are altering some part
                        of the DOM in your JQuery, well that call is probably going to be at the top of your

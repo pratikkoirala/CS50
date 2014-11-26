@@ -1,0 +1,44 @@
+void remove(int n)
+{
+    // nothing in list
+    if(list == NULL)
+        return;
+    else
+    {
+        // set pointer pointing at front of list
+        node* ptr = list;
+    
+        while(ptr != NULL)
+        {
+            if(ptr->n = n)
+            {
+                // not at the beginning of list
+                if(ptr->prev != NULL)
+                {
+                    // not at end (in the middle)
+                    if(ptr->next != NULL)
+                    {
+                        ptr->prev->next = ptr->next;
+                        ptr->next->prev = ptr->prev;
+                    }
+                    // at end
+                    else
+                    {
+                        ptr->prev->next = NULL;
+                    }
+                }
+                else
+                {
+                    list = ptr->next;   
+                }
+
+                free(ptr);
+                return;
+            }        
+
+            // update pointer
+            ptr =  ptr->next;
+    
+        }
+    }
+}

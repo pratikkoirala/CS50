@@ -1,0 +1,27 @@
+void insert(int n)
+{
+    // malloc new node
+    node* ptr = malloc(sizeof(node));
+    
+    make sure malloc returns successfully
+    if(ptr == NULL)
+        return;
+    
+    // set value of n
+    ptr->n = n;
+
+    // inserting first node into list
+    if(list == NULL)
+    {
+        list = ptr;
+        return;
+    }
+    else
+    {
+        ptr->next = list;
+        list->prev = ptr;
+        list = ptr; /*update head of list */
+    }
+
+    return;
+}
