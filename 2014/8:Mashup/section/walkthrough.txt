@@ -1,0 +1,5 @@
+1) import values from tab separated file into phpmyadmin table
+
+2) when you type into the textbox, that query value gets passed into search.php. Search.php
+   looks through the phpmyadmin table and returns an array of JSON objects that match the
+   query.
